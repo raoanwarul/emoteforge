@@ -424,8 +424,6 @@ export default function EmoteStudio({ specId }: Props) {
             </div>
           </div>
         )}
-
-        <AffiliateStrip context="export" compact />
       </div>
     );
   };
@@ -1160,6 +1158,10 @@ export default function EmoteStudio({ specId }: Props) {
         {result && renderDownloadsCard()}
       </div>
     </div>
+
+    {/* Full-width recommendations below the tool so the container is never clipped
+        by the sticky, scrollable preview column. */}
+    {result && <AffiliateStrip context="export" className="mt-8" />}
     <ProGate
       open={showProGate}
       onClose={() => setShowProGate(false)}
