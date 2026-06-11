@@ -17,7 +17,7 @@ const toolRoutes = [
   "/bulk-emote-pack",
 ];
 
-const staticRoutes = ["/blog", "/pricing"];
+const staticRoutes = ["/blog", "/pricing", "/recommended"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();

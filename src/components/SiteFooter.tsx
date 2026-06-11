@@ -19,6 +19,7 @@ export default function SiteFooter() {
           <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] text-zinc-500">
             <Link href="/blog" className="transition hover:text-zinc-200">Blog</Link>
             <Link href="/pricing" className="transition hover:text-zinc-200">Pricing</Link>
+            <Link href="/recommended" className="transition hover:text-zinc-200">Recommended</Link>
             <Link href="/emote-resizer" className="transition hover:text-zinc-200">Emote Resizer</Link>
             <Link href="/emote-background-remover" className="transition hover:text-zinc-200">BG Remover</Link>
           </div>
