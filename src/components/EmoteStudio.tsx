@@ -27,6 +27,7 @@ import { saveRecent, listRecent, recentToFile, type RecentFile } from "@/lib/rec
 import { makeAnimated, type AnimationPreset } from "@/lib/makeAnimated";
 import { usePro } from "@/lib/pro";
 import { ProGate } from "@/components/ProGate";
+import AffiliateStrip from "@/components/AffiliateStrip";
 
 interface Props {
   specId: string;
