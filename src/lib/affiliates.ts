@@ -144,6 +144,11 @@ export function getAffiliates(context: AffiliateContext, limit = 3): Affiliate[]
     .slice(0, limit);
 }
 
+/** All partners sorted by priority — no duplicates, for directory pages. */
+export function getAllAffiliates(): Affiliate[] {
+  return [...AFFILIATES].sort((a, b) => b.priority - a.priority);
+}
+
 /** Map a tool spec id to the most relevant affiliate context. */
 export function contextForSpec(specId: string): AffiliateContext {
   if (specId.includes("badge")) return "badges";
