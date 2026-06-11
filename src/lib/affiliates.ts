@@ -37,7 +37,7 @@ export interface Affiliate {
 // Static references so Next.js can inline NEXT_PUBLIC_* at build time.
 // (Dynamic `process.env[key]` is NOT inlined into the client bundle.)
 const ENV_URL: Record<string, string | undefined> = {
-  placeit: process.env.NEXT_PUBLIC_AFF_PLACEIT,
+  domestika: process.env.NEXT_PUBLIC_AFF_DOMESTIKA,
   own3d: process.env.NEXT_PUBLIC_AFF_OWN3D,
   nerdordie: process.env.NEXT_PUBLIC_AFF_NERDORDIE,
   fiverr: process.env.NEXT_PUBLIC_AFF_FIVERR,
@@ -51,12 +51,12 @@ type AffiliateSeed = Omit<Affiliate, "url">;
 
 const SEED: AffiliateSeed[] = [
   {
-    id: "placeit",
-    name: "Placeit by Envato",
-    blurb: "Thousands of ready-made emote, badge and overlay templates you can customize in the browser.",
-    cta: "Browse templates",
-    icon: "🎨",
-    fallbackUrl: "https://placeit.net/c/twitch",
+    id: "domestika",
+    name: "Domestika",
+    blurb: "Learn to draw your own emotes, overlays and stream art from pro illustrators and designers.",
+    cta: "Browse creative courses",
+    icon: "🎓",
+    fallbackUrl: "https://domestika.sjv.io/m4jEjX",
     contexts: ["emotes", "badges", "overlays", "export", "general"],
     priority: 100,
   },
@@ -76,7 +76,7 @@ const SEED: AffiliateSeed[] = [
     blurb: "Premium overlays, alerts and emote packs trusted by thousands of streamers.",
     cta: "Shop premium packs",
     icon: "🔥",
-    fallbackUrl: "https://www.own3d.tv/en/",
+    fallbackUrl: "https://www.own3d.tv?deal=rao",
     contexts: ["emotes", "overlays", "export", "general"],
     priority: 85,
   },
