@@ -1076,12 +1076,25 @@ export default function EmoteStudio({ specId }: Props) {
               {!animated && (
                 <div className="flex gap-2">
                   {!bgRemoved && (
-                    <button type="button" onClick={handleRemoveBg} disabled={busy} className="btn-secondary cursor-pointer flex-1 py-2 text-xs font-semibold">
+                    <button
+                      type="button"
+                      onClick={handleRemoveBg}
+                      disabled={busy}
+                      className="cursor-pointer flex-1 py-2 text-xs font-bold rounded-lg transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                      style={{
+                        background: busy
+                          ? "linear-gradient(135deg,#6d28d9,#7c3aed)"
+                          : "linear-gradient(135deg,#7c3aed 0%,#a855f7 50%,#ec4899 100%)",
+                        color: "#fff",
+                        boxShadow: busy ? "none" : "0 0 16px rgba(139,92,246,0.45), 0 2px 6px rgba(0,0,0,0.3)",
+                        letterSpacing: "0.01em",
+                      }}
+                    >
                       {busy && progress.toLowerCase().includes("background")
-                        ? "Removing…"
+                        ? "✂️ Removing…"
                         : busy && progress.toLowerCase().includes("model")
-                          ? "Loading AI…"
-                          : "Remove background"}
+                          ? "🤖 Loading AI…"
+                          : "✨ Remove Background"}
                     </button>
                   )}
                   {(bgRemoved || (file && !isAnimatedFile(file))) && (
