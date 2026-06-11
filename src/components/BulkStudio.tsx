@@ -9,6 +9,8 @@ import {
 } from "@/lib/imageEngine";
 import { buildZip, downloadBlob, type ZipEntry } from "@/lib/zip";
 import { getSpec, formatBytes, ASSET_LIST } from "@/lib/specs";
+import { usePro } from "@/lib/pro";
+import { ProGate } from "@/components/ProGate";
 
 interface Item {
   id: string;
@@ -26,6 +28,9 @@ export default function BulkStudio() {
   const [items, setItems] = useState<Item[]>([]);
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(0);
+  const [showProGate, setShowProGate] = useState(false);
+  
+  const { isPro } = usePro();
   const itemsRef = useRef<Item[]>([]);
   itemsRef.current = items;
 
@@ -40,8 +45,17 @@ export default function BulkStudio() {
         baseName: f.name.replace(/\.[^.]+$/, "").replace(/[^a-z0-9_-]/gi, "_").toLowerCase(),
         status: "queued" as const,
       }));
-    setItems((prev) => [...prev, ...next]);
-  }, []);
+
+    if (!isPro && itemsRef.current.length + next.length > 2) {
+      const allowedCount = Math.max(0, 2 - itemsRef.current.length);
+      if (allowedCount > 0) {
+        setItems((prev) => [...prev, ...next.slice(0, allowedCount)]);
+      }
+      setShowProGate(true);
+    } else {
+      setItems((prev) => [...prev, ...next]);
+    }
+  }, [isPro]);
 
   const clearAll = useCallback(() => {
     itemsRef.current.forEach((i) => revokeResult(i.result ?? null));
@@ -50,6 +64,10 @@ export default function BulkStudio() {
   }, []);
 
   const processAll = useCallback(async () => {
+    if (!isPro && itemsRef.current.length > 2) {
+      setShowProGate(true);
+      return;
+    }
     setBusy(true);
     setDone(0);
     const current = itemsRef.current;
@@ -81,7 +99,7 @@ export default function BulkStudio() {
       setDone(i + 1);
     }
     setBusy(false);
-  }, [spec]);
+  }, [spec, isPro]);
 
   const downloadPack = useCallback(async () => {
     const entries: ZipEntry[] = itemsRef.current
@@ -204,6 +222,11 @@ export default function BulkStudio() {
           </div>
         </>
       )}
+      <ProGate
+        open={showProGate}
+        onClose={() => setShowProGate(false)}
+        feature="Bulk resizing for 3 or more images"
+      />
     </div>
   );
 }

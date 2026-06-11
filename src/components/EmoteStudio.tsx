@@ -25,6 +25,8 @@ import { buildZip, downloadBlob } from "@/lib/zip";
 import { track, trackView } from "@/lib/analytics";
 import { saveRecent, listRecent, recentToFile, type RecentFile } from "@/lib/recentFiles";
 import { makeAnimated, type AnimationPreset } from "@/lib/makeAnimated";
+import { usePro } from "@/lib/pro";
+import { ProGate } from "@/components/ProGate";
 
 interface Props {
   specId: string;
@@ -32,6 +34,10 @@ interface Props {
 
 export default function EmoteStudio({ specId }: Props) {
   const spec: AssetSpec = getSpec(specId);
+
+  const { isPro } = usePro();
+  const [showProGate, setShowProGate] = useState(false);
+  const [proFeatureName, setProFeatureName] = useState("");
 
   const [file, setFile] = useState<File | null>(null);
   const [working, setWorking] = useState<Blob | null>(null);
@@ -219,6 +225,15 @@ export default function EmoteStudio({ specId }: Props) {
 
   const handleRemoveBg = useCallback(async () => {
     if (!file || animated) return;
+    if (!isPro) {
+      const stored = localStorage.getItem("ef_free_bg_removals");
+      const currentCount = stored ? parseInt(stored, 10) : 0;
+      if (currentCount >= 3) {
+        setProFeatureName("Unlimited AI background remover");
+        setShowProGate(true);
+        return;
+      }
+    }
     setBusy(true);
     setProgress("Loading AI model… (first run downloads ~10 MB)");
     try {
@@ -227,6 +242,11 @@ export default function EmoteStudio({ specId }: Props) {
       });
       setWorking(out);
       setBgRemoved(true);
+      if (!isPro) {
+        const stored = localStorage.getItem("ef_free_bg_removals");
+        const currentCount = stored ? parseInt(stored, 10) : 0;
+        localStorage.setItem("ef_free_bg_removals", String(currentCount + 1));
+      }
     } catch (err) {
       setError(
         "Background removal failed: " +
@@ -236,7 +256,7 @@ export default function EmoteStudio({ specId }: Props) {
       setBusy(false);
       setProgress("");
     }
-  }, [file, animated, setBusy, setProgress, setWorking, setBgRemoved, setError]);
+  }, [file, animated, setBusy, setProgress, setWorking, setBgRemoved, setError, isPro]);
 
   const restoreOriginal = useCallback(() => {
     if (file) {
@@ -907,6 +927,11 @@ export default function EmoteStudio({ specId }: Props) {
                           disabled={busy}
                           onClick={async () => {
                             if (!working) return;
+                            if (!isPro && (p === "rainbow" || p === "spin")) {
+                              setProFeatureName(`Premium ${p} animation preset`);
+                              setShowProGate(true);
+                              return;
+                            }
                             setBusy(true);
                             try {
                               const res = await makeAnimated(working, spec.sizes, p, setProgress);
@@ -1009,6 +1034,11 @@ export default function EmoteStudio({ specId }: Props) {
                               disabled={busy}
                               onClick={async () => {
                                 if (!working) return;
+                                if (!isPro && (p === "rainbow" || p === "spin")) {
+                                  setProFeatureName(`Premium ${p} animation preset`);
+                                  setShowProGate(true);
+                                  return;
+                                }
                                 setBusy(true);
                                 try {
                                   const res = await makeAnimated(working, spec.sizes, p, setProgress);
@@ -1125,6 +1155,11 @@ export default function EmoteStudio({ specId }: Props) {
         {result && renderDownloadsCard()}
       </div>
     </div>
+    <ProGate
+      open={showProGate}
+      onClose={() => setShowProGate(false)}
+      feature={proFeatureName}
+    />
     </>
   );
 }
