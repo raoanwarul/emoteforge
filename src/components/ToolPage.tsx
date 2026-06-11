@@ -1,5 +1,6 @@
 import EmoteStudio from "@/components/EmoteStudio";
 import AdSlot from "@/components/AdSlot";
+import AffiliateStrip from "@/components/AffiliateStrip";
 
 export interface FaqItem {
   q: string;
@@ -82,6 +83,8 @@ export default function ToolPage({ specId, title, subtitle, intro, faq }: Props)
       </div>
 
       <EmoteStudio specId={specId} />
+
+      <AffiliateStrip context="export" limit={3} className="mt-4" />
 
       <AdSlot slot="1234567890" />
 

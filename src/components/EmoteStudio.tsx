@@ -1111,6 +1111,7 @@ export default function EmoteStudio({ specId }: Props) {
             </div>
           </div>
         )}
+      </div>
 
         {/* Mobile-only Downloads and export actions */}
         {result && (
@@ -1118,7 +1119,6 @@ export default function EmoteStudio({ specId }: Props) {
             {renderDownloadsCard()}
           </div>
         )}
-      </div>
 
       {/* ---- Right Column: Desktop Previews & Downloads (Sticky, hidden on mobile) ---- */}
       <div className="hidden lg:block space-y-4 lg:sticky lg:top-24 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
@@ -1157,6 +1157,7 @@ export default function EmoteStudio({ specId }: Props) {
         {result && renderDownloadsCard()}
       </div>
     </div>
+
     <ProGate
       open={showProGate}
       onClose={() => setShowProGate(false)}

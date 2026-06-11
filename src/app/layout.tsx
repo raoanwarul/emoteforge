@@ -115,6 +115,14 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#7c3aed" />
+        {/* Impact.com verification — uses a non-standard `value` attribute
+            (not `content`), so the props are spread to satisfy React's types. */}
+        <meta
+          {...({
+            name: "impact-site-verification",
+            value: "8963776a-50f9-4adf-9dcb-436bcb2b0096",
+          } as React.MetaHTMLAttributes<HTMLMetaElement>)}
+        />
       </head>
       <body className="flex min-h-full flex-col bg-zinc-950 text-zinc-100">
         <ClientInit />
