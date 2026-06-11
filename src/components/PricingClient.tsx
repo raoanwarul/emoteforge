@@ -8,7 +8,7 @@ const freeFeatures = [
   "Standard image resizing & specs",
   "Animated emote export (GIF)",
   "12 animation styles (100% Free)",
-  "AI background removal (5 per session)",
+  "AI background removal (100% Free)",
   "Bulk processing (up to 2 images)",
   "100% private, runs in browser",
 ];
@@ -17,7 +17,6 @@ const proFeatures = [
   "Everything in Free, plus:",
   "Unlimited bulk pack ZIP exports",
   "Bulk AI Background Removal (NEW)",
-  "Unlimited AI background removals",
   "Priority updates & feature support",
   "One-time payment, lifetime access",
 ];

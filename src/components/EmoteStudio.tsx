@@ -225,15 +225,6 @@ export default function EmoteStudio({ specId }: Props) {
 
   const handleRemoveBg = useCallback(async () => {
     if (!file || animated) return;
-    if (!isPro) {
-      const stored = localStorage.getItem("ef_free_bg_removals");
-      const currentCount = stored ? parseInt(stored, 10) : 0;
-      if (currentCount >= 5) {
-        setProFeatureName("Unlimited AI background remover");
-        setShowProGate(true);
-        return;
-      }
-    }
     setBusy(true);
     setProgress("Loading AI model… (first run downloads ~10 MB)");
     try {
@@ -242,11 +233,6 @@ export default function EmoteStudio({ specId }: Props) {
       });
       setWorking(out);
       setBgRemoved(true);
-      if (!isPro) {
-        const stored = localStorage.getItem("ef_free_bg_removals");
-        const currentCount = stored ? parseInt(stored, 10) : 0;
-        localStorage.setItem("ef_free_bg_removals", String(currentCount + 1));
-      }
     } catch (err) {
       setError(
         "Background removal failed: " +
@@ -256,7 +242,7 @@ export default function EmoteStudio({ specId }: Props) {
       setBusy(false);
       setProgress("");
     }
-  }, [file, animated, setBusy, setProgress, setWorking, setBgRemoved, setError, isPro]);
+  }, [file, animated, setBusy, setProgress, setWorking, setBgRemoved, setError]);
 
   const restoreOriginal = useCallback(() => {
     if (file) {

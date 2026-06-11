@@ -4,7 +4,7 @@ import PricingClient from "@/components/PricingClient";
 export const metadata: Metadata = {
   title: "Pricing & Pro — Get EmoteForge Pro",
   description:
-    "Unlock unlimited bulk pack resizes, bulk AI background removal, and unlimited background removals with a one-time EmoteForge Pro lifetime license.",
+    "Unlock unlimited bulk pack resizes and bulk AI background removal with a one-time EmoteForge Pro lifetime license.",
   alternates: { canonical: "/pricing" },
 };
 
