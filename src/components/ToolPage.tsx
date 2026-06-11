@@ -1,5 +1,7 @@
 import EmoteStudio from "@/components/EmoteStudio";
 import AdSlot from "@/components/AdSlot";
+import AffiliateStrip from "@/components/AffiliateStrip";
+import { contextForSpec } from "@/lib/affiliates";
 
 export interface FaqItem {
   q: string;
@@ -82,6 +84,8 @@ export default function ToolPage({ specId, title, subtitle, intro, faq }: Props)
       </div>
 
       <EmoteStudio specId={specId} />
+
+      <AffiliateStrip context={contextForSpec(specId)} className="mt-10" />
 
       <AdSlot slot="1234567890" />
 
