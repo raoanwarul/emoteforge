@@ -228,7 +228,7 @@ export default function EmoteStudio({ specId }: Props) {
     if (!isPro) {
       const stored = localStorage.getItem("ef_free_bg_removals");
       const currentCount = stored ? parseInt(stored, 10) : 0;
-      if (currentCount >= 3) {
+      if (currentCount >= 5) {
         setProFeatureName("Unlimited AI background remover");
         setShowProGate(true);
         return;
@@ -920,18 +920,26 @@ export default function EmoteStudio({ specId }: Props) {
                     onToggle={() => toggleSection("makeAnimated")}
                   >
                     <div className="flex flex-wrap gap-1.5">
-                      {(["bounce", "shake", "pulse", "rainbow", "spin"] as AnimationPreset[]).map((p) => (
+                      {([
+                        "bounce",
+                        "shake",
+                        "pulse",
+                        "rainbow",
+                        "spin",
+                        "wobble",
+                        "wiggle",
+                        "zoom",
+                        "rave",
+                        "slide",
+                        "roll",
+                        "glitch",
+                      ] as AnimationPreset[]).map((p) => (
                         <button
                           key={p}
                           type="button"
                           disabled={busy}
                           onClick={async () => {
                             if (!working) return;
-                            if (!isPro && (p === "rainbow" || p === "spin")) {
-                              setProFeatureName(`Premium ${p} animation preset`);
-                              setShowProGate(true);
-                              return;
-                            }
                             setBusy(true);
                             try {
                               const res = await makeAnimated(working, spec.sizes, p, setProgress);
@@ -1027,21 +1035,29 @@ export default function EmoteStudio({ specId }: Props) {
                     <div className="border-t border-zinc-800/60 pt-3 mt-3">
                       <Field label="✨ Change animation style">
                         <div className="flex flex-wrap gap-1.5">
-                          {(["bounce", "shake", "pulse", "rainbow", "spin"] as AnimationPreset[]).map((p) => (
+                          {[
+                            "bounce",
+                            "shake",
+                            "pulse",
+                            "rainbow",
+                            "spin",
+                            "wobble",
+                            "wiggle",
+                            "zoom",
+                            "rave",
+                            "slide",
+                            "roll",
+                            "glitch",
+                          ].map((p) => (
                             <button
                               key={p}
                               type="button"
                               disabled={busy}
                               onClick={async () => {
                                 if (!working) return;
-                                if (!isPro && (p === "rainbow" || p === "spin")) {
-                                  setProFeatureName(`Premium ${p} animation preset`);
-                                  setShowProGate(true);
-                                  return;
-                                }
                                 setBusy(true);
                                 try {
-                                  const res = await makeAnimated(working, spec.sizes, p, setProgress);
+                                  const res = await makeAnimated(working, spec.sizes, p as AnimationPreset, setProgress);
                                   setResult((prev) => {
                                     if (prev) revokeResult(prev);
                                     return res;

@@ -11,6 +11,7 @@ import { buildZip, downloadBlob, type ZipEntry } from "@/lib/zip";
 import { getSpec, formatBytes, ASSET_LIST } from "@/lib/specs";
 import { usePro } from "@/lib/pro";
 import { ProGate } from "@/components/ProGate";
+import { removeBackground } from "@/lib/bgRemoval";
 
 interface Item {
   id: string;
@@ -19,6 +20,7 @@ interface Item {
   result?: ProcessResult;
   status: "queued" | "processing" | "done" | "error";
   error?: string;
+  progress?: string;
 }
 
 const STATIC_SPECS = ASSET_LIST.filter((s) => s.platform !== "generic");
@@ -29,6 +31,8 @@ export default function BulkStudio() {
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(0);
   const [showProGate, setShowProGate] = useState(false);
+  const [proFeatureName, setProFeatureName] = useState("Bulk resizing for 3 or more images");
+  const [removeBgEnabled, setRemoveBgEnabled] = useState(false);
   
   const { isPro } = usePro();
   const itemsRef = useRef<Item[]>([]);
@@ -51,6 +55,7 @@ export default function BulkStudio() {
       if (allowedCount > 0) {
         setItems((prev) => [...prev, ...next.slice(0, allowedCount)]);
       }
+      setProFeatureName("Bulk resizing for 3 or more images");
       setShowProGate(true);
     } else {
       setItems((prev) => [...prev, ...next]);
@@ -65,20 +70,54 @@ export default function BulkStudio() {
 
   const processAll = useCallback(async () => {
     if (!isPro && itemsRef.current.length > 2) {
+      setProFeatureName("Bulk resizing for 3 or more images");
       setShowProGate(true);
       return;
     }
+    if (removeBgEnabled && !isPro) {
+      setProFeatureName("Bulk AI Background Removal");
+      setShowProGate(true);
+      return;
+    }
+
     setBusy(true);
     setDone(0);
     const current = itemsRef.current;
     for (let i = 0; i < current.length; i++) {
       const item = current[i];
       setItems((prev) =>
-        prev.map((p) => (p.id === item.id ? { ...p, status: "processing" } : p)),
+        prev.map((p) =>
+          p.id === item.id
+            ? {
+                ...p,
+                status: "processing" as const,
+                progress: removeBgEnabled ? "Loading AI model…" : "Resizing…",
+              }
+            : p
+        )
       );
+
       try {
+        let activeFile: Blob = item.file;
+        if (removeBgEnabled) {
+          activeFile = await removeBackground(item.file, (p) => {
+            setItems((prev) =>
+              prev.map((pItem) =>
+                pItem.id === item.id
+                  ? { ...pItem, progress: `AI: ${Math.round(p * 100)}%` }
+                  : pItem
+              )
+            );
+          });
+          setItems((prev) =>
+            prev.map((pItem) =>
+              pItem.id === item.id ? { ...pItem, progress: "Resizing…" } : pItem
+            )
+          );
+        }
+
         const result = await processStatic(
-          item.file,
+          activeFile,
           spec.sizes,
           { ...DEFAULT_OPTIONS, watermark: false },
           "png",
@@ -99,7 +138,7 @@ export default function BulkStudio() {
       setDone(i + 1);
     }
     setBusy(false);
-  }, [spec, isPro]);
+  }, [spec, isPro, removeBgEnabled]);
 
   const downloadPack = useCallback(async () => {
     const entries: ZipEntry[] = itemsRef.current
@@ -123,7 +162,7 @@ export default function BulkStudio() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap items-center gap-4 justify-between">
         <select
           value={specId}
           onChange={(e) => setSpecId(e.target.value)}
@@ -135,6 +174,21 @@ export default function BulkStudio() {
             </option>
           ))}
         </select>
+
+        <label className="flex items-center gap-2 text-xs font-semibold text-zinc-300 cursor-pointer select-none bg-zinc-900/60 hover:bg-zinc-800/60 border border-zinc-800 rounded-lg px-3 py-2 transition-colors">
+          <input
+            type="checkbox"
+            checked={removeBgEnabled}
+            onChange={(e) => setRemoveBgEnabled(e.target.checked)}
+            className="rounded border-zinc-700 bg-zinc-950 text-violet-600 focus:ring-violet-500"
+          />
+          <span>
+            Remove backgrounds (AI){" "}
+            <span className="ml-1 text-[9px] font-bold uppercase tracking-wider text-violet-400 bg-violet-500/10 px-1 py-px rounded border border-violet-500/20">
+              Pro
+            </span>
+          </span>
+        </label>
       </div>
 
       <div
@@ -208,13 +262,15 @@ export default function BulkStudio() {
                 <div className="min-w-0 flex-1">
                   <div className="truncate text-sm text-zinc-200">{item.baseName}</div>
                   <div className="text-xs text-zinc-500">
-                    {item.status === "done" && item.result
-                      ? item.result.sizes
-                          .map((s) => `${s.size}:${formatBytes(s.bytes)}`)
-                          .join("  ")
-                      : item.status === "error"
-                        ? "Failed"
-                        : item.status}
+                    {item.status === "processing"
+                      ? item.progress || "Processing…"
+                      : item.status === "done" && item.result
+                        ? item.result.sizes
+                            .map((s) => `${s.size}:${formatBytes(s.bytes)}`)
+                            .join("  ")
+                        : item.status === "error"
+                          ? `Failed: ${item.error || ""}`
+                          : item.status}
                   </div>
                 </div>
               </div>
@@ -225,7 +281,7 @@ export default function BulkStudio() {
       <ProGate
         open={showProGate}
         onClose={() => setShowProGate(false)}
-        feature="Bulk resizing for 3 or more images"
+        feature={proFeatureName}
       />
     </div>
   );

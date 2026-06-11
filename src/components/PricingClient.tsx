@@ -7,8 +7,8 @@ import { usePro } from "@/lib/pro";
 const freeFeatures = [
   "Standard image resizing & specs",
   "Animated emote export (GIF)",
-  "Standard animations (Bounce, Shake, Pulse)",
-  "AI background removal (3 per session)",
+  "12 animation styles (100% Free)",
+  "AI background removal (5 per session)",
   "Bulk processing (up to 2 images)",
   "100% private, runs in browser",
 ];
@@ -16,9 +16,9 @@ const freeFeatures = [
 const proFeatures = [
   "Everything in Free, plus:",
   "Unlimited bulk pack ZIP exports",
+  "Bulk AI Background Removal (NEW)",
   "Unlimited AI background removals",
-  "Premium animations (Rainbow & Spin)",
-  "No watermark, priority updates",
+  "Priority updates & feature support",
   "One-time payment, lifetime access",
 ];
 

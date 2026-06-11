@@ -33,7 +33,19 @@ async function getFFmpeg(): Promise<FFmpegModule> {
   return ffmpegGetter();
 }
 
-export type AnimationPreset = "bounce" | "shake" | "pulse" | "rainbow" | "spin";
+export type AnimationPreset =
+  | "bounce"
+  | "shake"
+  | "pulse"
+  | "rainbow"
+  | "spin"
+  | "wobble"
+  | "wiggle"
+  | "zoom"
+  | "rave"
+  | "slide"
+  | "roll"
+  | "glitch";
 
 interface FrameTransform {
   offsetX: number;
@@ -63,6 +75,51 @@ function generateFrames(preset: AnimationPreset, totalFrames: number): FrameTran
         break;
       case "spin":
         frames.push({ offsetX: 0, offsetY: 0, scale: 1, rotation: t * 360, hue: 0 });
+        break;
+      case "wobble":
+        frames.push({
+          offsetX: Math.sin(angle) * 0.05,
+          offsetY: 0,
+          scale: 1 + Math.abs(Math.sin(angle)) * 0.05,
+          rotation: Math.sin(angle) * 8,
+          hue: 0,
+        });
+        break;
+      case "wiggle":
+        frames.push({ offsetX: 0, offsetY: 0, scale: 1, rotation: Math.sin(angle * 3) * 10, hue: 0 });
+        break;
+      case "zoom":
+        frames.push({ offsetX: 0, offsetY: 0, scale: 1 + Math.sin(angle) * 0.25, rotation: 0, hue: 0 });
+        break;
+      case "rave":
+        frames.push({
+          offsetX: Math.sin(angle * 4) * 0.07,
+          offsetY: Math.cos(angle * 5) * 0.07,
+          scale: 1 + Math.sin(angle * 3) * 0.08,
+          rotation: Math.sin(angle * 4) * 6,
+          hue: t * 360,
+        });
+        break;
+      case "slide":
+        frames.push({ offsetX: Math.sin(angle) * 0.2, offsetY: 0, scale: 1, rotation: 0, hue: 0 });
+        break;
+      case "roll":
+        frames.push({
+          offsetX: Math.sin(angle) * 0.1,
+          offsetY: Math.cos(angle) * 0.1,
+          scale: 1,
+          rotation: t * 360,
+          hue: 0,
+        });
+        break;
+      case "glitch":
+        frames.push({
+          offsetX: (Math.sin(angle * 7) > 0.6 ? 0.05 : 0) * (Math.sin(angle * 13) > 0 ? 1 : -1),
+          offsetY: (Math.cos(angle * 9) > 0.6 ? 0.05 : 0) * (Math.cos(angle * 11) > 0 ? 1 : -1),
+          scale: Math.sin(angle * 5) > 0.8 ? 0.9 : 1.05,
+          rotation: Math.sin(angle * 15) > 0.7 ? 8 : -8,
+          hue: 0,
+        });
         break;
     }
   }
