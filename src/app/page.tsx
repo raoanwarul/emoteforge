@@ -12,34 +12,10 @@ const toolLinks: Record<string, string> = {
   "discord-sticker": "/discord-sticker-maker",
 };
 
-const features = [
-  { icon: "🔒", title: "100% private", text: "Everything runs in your browser. Your artwork is never uploaded to a server." },
-  { icon: "👁️", title: "Real-size preview", text: "See exactly how your emote looks at 28px in a live chat mockup before you export." },
-  { icon: "📦", title: "All sizes at once", text: "One image in, every required size out — plus a platform-ready ZIP." },
-  { icon: "✅", title: "Auto-validated", text: "We check every file against the platform's size limits and optimize to fit." },
-  { icon: "🎞️", title: "Animated support", text: "Drop a GIF or video to export looping animated emotes." },
-  { icon: "✂️", title: "Background removal", text: "Remove backgrounds and add sticker outlines without an editor." },
-];
-
 const howItWorks = [
   { step: "1", icon: "📤", title: "Upload your image", text: "Drop any image, GIF or video. Supports PNG, JPG, GIF, WebP and MP4." },
   { step: "2", icon: "🎨", title: "Customize & preview", text: "Adjust padding, background, outline, text overlay and see a real-time chat mockup at actual size." },
   { step: "3", icon: "⬇️", title: "Download all sizes", text: "Get every required size in one click — individual PNGs or a platform-ready ZIP file." },
-];
-
-const allTools = [
-  { href: "/twitch-emote-maker", label: "Twitch Emote Maker" },
-  { href: "/twitch-sub-badge-maker", label: "Twitch Sub Badge Maker" },
-  { href: "/twitch-bit-badge-maker", label: "Twitch Bits Badge Maker" },
-  { href: "/kick-emote-maker", label: "Kick Emote Maker" },
-  { href: "/7tv-emote-maker", label: "7TV Emote Maker" },
-  { href: "/bttv-emote-maker", label: "BTTV / FFZ Emote Maker" },
-  { href: "/discord-sticker-maker", label: "Discord Sticker Maker" },
-  { href: "/emote-resizer", label: "Emote Resizer" },
-  { href: "/emote-background-remover", label: "Emote Background Remover" },
-  { href: "/emote-board", label: "Emote Board" },
-  { href: "/bulk-emote-pack", label: "Bulk Emote Pack" },
-  { href: "/blog", label: "Guides & Blog" },
 ];
 
 export default function Home() {
@@ -172,9 +148,9 @@ export default function Home() {
       </section>
 
       {/* Tools grid */}
-      <section className="py-8">
+      <section className="py-8 pb-16">
         <h2 className="mb-6 text-center text-2xl font-semibold text-zinc-100">
-          Free emote & badge tools for every platform
+          Free emote &amp; badge tools for every platform
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {ASSET_LIST.map((spec) => (
@@ -189,63 +165,6 @@ export default function Home() {
               <div className="mt-4 text-sm font-medium text-zinc-300 group-hover:text-violet-400">
                 Open tool →
               </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-16">
-        <h2 className="mb-8 text-center text-2xl font-semibold text-zinc-100">
-          Why streamers choose EmoteForge
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((f) => (
-            <div
-              key={f.title}
-              className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6"
-            >
-              <div className="text-2xl">{f.icon}</div>
-              <div className="mt-3 font-semibold text-zinc-100">{f.title}</div>
-              <p className="mt-1 text-sm text-zinc-400">{f.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SEO keyword-rich intro paragraph */}
-      <section className="py-12">
-        <div className="mx-auto max-w-3xl rounded-2xl border border-zinc-800 bg-zinc-900/20 p-8">
-          <h2 className="text-xl font-semibold text-zinc-100 mb-4">
-            The free emote maker for Twitch, Kick, 7TV, BTTV, FFZ & Discord
-          </h2>
-          <div className="space-y-3 text-sm leading-relaxed text-zinc-400">
-            <p>
-              EmoteForge is a free, browser-based emote maker designed for streamers on Twitch, Kick, 7TV, BetterTTV (BTTV), FrankerFaceZ (FFZ) and Discord. Upload any image and instantly generate all required emote sizes — including 28×28, 56×56, 112×112 for Twitch emotes, 18×36×72 for sub badges and bit badges, 32×64×96×128 for 7TV, and 320×320 for Discord stickers.
-            </p>
-            <p>
-              Unlike other emote makers that require software downloads or account signups, EmoteForge processes everything 100% in your browser using the Canvas API and WebAssembly. Your artwork never leaves your device — no upload, no server, no waiting. Create static PNG emotes or animated GIF emotes with a built-in background remover, text overlay, sticker outline, color adjustments, and a live chat preview that shows exactly how your emote reads at 28px.
-            </p>
-            <p>
-              Whether you need a Twitch emote maker, Kick emote creator, emote resizer, or emote background remover — EmoteForge has you covered with 11+ free tools, zero signup, and instant export to a platform-ready ZIP file.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Internal links section for SEO crawling */}
-      <section className="py-8 pb-16">
-        <h2 className="mb-4 text-center text-lg font-semibold text-zinc-100">
-          All tools
-        </h2>
-        <div className="flex flex-wrap justify-center gap-2">
-          {allTools.map((t) => (
-            <Link
-              key={t.href}
-              href={t.href}
-              className="rounded-full border border-zinc-800 bg-zinc-900/40 px-4 py-2 text-xs font-medium text-zinc-300 transition hover:border-violet-500 hover:text-violet-300"
-            >
-              {t.label}
             </Link>
           ))}
         </div>

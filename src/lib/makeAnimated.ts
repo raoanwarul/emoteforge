@@ -108,8 +108,6 @@ export async function makeAnimated(
     ctx.rotate((f.rotation * Math.PI) / 180);
     ctx.scale(f.scale, f.scale);
 
-    if (f.hue !== 0) ctx.filter = `hue-rotate(${f.hue}deg)`;
-
     const ratio = bmp.width / bmp.height;
     let dw = frameSize * 0.8;
     let dh = frameSize * 0.8;
@@ -118,6 +116,42 @@ export async function makeAnimated(
 
     ctx.drawImage(bmp, -dw / 2, -dh / 2, dw, dh);
     ctx.restore();
+
+    // Apply hue rotation via manual pixel manipulation (ctx.filter is
+    // not supported in Safari / WebKit, so we do it ourselves).
+    if (f.hue !== 0) {
+      const imgData = ctx.getImageData(0, 0, frameSize, frameSize);
+      const d = imgData.data;
+      const hueDeg = f.hue;
+      for (let px = 0; px < d.length; px += 4) {
+        if (d[px + 3] === 0) continue; // skip fully transparent
+        const r = d[px] / 255, g = d[px + 1] / 255, b = d[px + 2] / 255;
+        const max = Math.max(r, g, b), min = Math.min(r, g, b);
+        const l = (max + min) / 2;
+        if (max === min) continue; // grey — no hue to shift
+        const delta = max - min;
+        const s = l > 0.5 ? delta / (2 - max - min) : delta / (max + min);
+        let h = 0;
+        if (max === r) h = ((g - b) / delta + (g < b ? 6 : 0)) / 6;
+        else if (max === g) h = ((b - r) / delta + 2) / 6;
+        else h = ((r - g) / delta + 4) / 6;
+        h = (h + hueDeg / 360) % 1;
+        // HSL → RGB
+        const hue2rgb = (p: number, q: number, t: number) => {
+          if (t < 0) t += 1; if (t > 1) t -= 1;
+          if (t < 1 / 6) return p + (q - p) * 6 * t;
+          if (t < 1 / 2) return q;
+          if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+          return p;
+        };
+        const q2 = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p2 = 2 * l - q2;
+        d[px] = Math.round(hue2rgb(p2, q2, h + 1 / 3) * 255);
+        d[px + 1] = Math.round(hue2rgb(p2, q2, h) * 255);
+        d[px + 2] = Math.round(hue2rgb(p2, q2, h - 1 / 3) * 255);
+      }
+      ctx.putImageData(imgData, 0, 0);
+    }
 
     const blob = await new Promise<Blob>((res) => canvas.toBlob((b) => res(b!), "image/png"));
     frameBlobs.push(new Uint8Array(await blob.arrayBuffer()));
