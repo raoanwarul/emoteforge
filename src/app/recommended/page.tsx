@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { getAllAffiliates } from "@/lib/affiliates";
-import { track } from "@/lib/analytics";
 
 export const metadata: Metadata = {
   title: "Recommended Streamer Tools & Assets — EmoteForge",
@@ -11,8 +10,8 @@ export const metadata: Metadata = {
 
 // Category labels for the tag pills shown on each card
 const CONTEXT_LABELS: Record<string, string> = {
-  emotes: "Emotes & Badges",
-  badges: "Emotes & Badges",
+  emotes: "Emotes & Art",
+  badges: "Emotes & Art",
   overlays: "Overlays & Alerts",
   export: "Stream Tools",
   general: "General",
@@ -41,7 +40,6 @@ export default function RecommendedPage() {
       {/* All affiliates — one grid, no duplicates */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {affiliates.map((a) => {
-          // Pick the most specific label from the affiliate's contexts
           const primaryContext =
             a.contexts.find((c) => c !== "general" && c !== "export") ??
             a.contexts[0];
@@ -53,15 +51,9 @@ export default function RecommendedPage() {
               href={a.url}
               target="_blank"
               rel="sponsored noopener noreferrer"
-              onClick={() =>
-                track("affiliate_click", {
-                  partner: a.id,
-                  context: "recommended-page",
-                })
-              }
               className="group flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 transition-all duration-200 hover:border-violet-500/60 hover:bg-zinc-900/70"
             >
-              {/* Icon + Name */}
+              {/* Icon + Name + Category pill */}
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <span className="text-xl" aria-hidden>
