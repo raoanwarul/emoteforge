@@ -30,7 +30,7 @@ const toolLinks: Record<string, string> = {
 };
 
 export default function ToolPage({ specId, title, subtitle, intro, faq }: Props) {
-  const toolUrl = `https://emoteforge.app${toolLinks[specId] || ""}`;
+  const toolUrl = `https://www.emoteforge.app${toolLinks[specId] || ""}`;
 
   const webAppSchema = {
     "@context": "https://schema.org",

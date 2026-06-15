@@ -23,11 +23,11 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "EmoteForge",
-    "url": "https://emoteforge.app",
+    "url": "https://www.emoteforge.app",
     "description": "Free online Twitch & Kick Emote and Badge Maker. Resizes emotes in your browser, completely private and instant.",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://emoteforge.app/emote-resizer?q={search_term_string}",
+      "target": "https://www.emoteforge.app/emote-resizer?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   };
@@ -36,8 +36,8 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "EmoteForge",
-    "url": "https://emoteforge.app",
-    "logo": "https://emoteforge.app/icon-512.png",
+    "url": "https://www.emoteforge.app",
+    "logo": "https://www.emoteforge.app/icon-512.png",
     "sameAs": [
       "https://github.com/raoanwarul/emoteforge"
     ]
@@ -48,7 +48,7 @@ export default function Home() {
     "@type": "SoftwareApplication",
     "name": "EmoteForge",
     "description": "Free online emote and badge maker for Twitch, Kick, 7TV, BTTV, FFZ and Discord. Create perfectly-sized emotes, sub badges and stickers instantly in your browser.",
-    "url": "https://emoteforge.app",
+    "url": "https://www.emoteforge.app",
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "All",
     "browserRequirements": "Requires JavaScript and HTML5 Canvas",

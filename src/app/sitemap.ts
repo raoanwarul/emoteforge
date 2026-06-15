@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { POSTS } from "@/lib/blog";
 
-const base = "https://emoteforge.app";
+const base = "https://www.emoteforge.app";
 
 const toolRoutes = [
   "/twitch-emote-maker",

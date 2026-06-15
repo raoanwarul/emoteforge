@@ -9,8 +9,8 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/_next/", "/api/"],
       },
     ],
-    sitemap: "https://emoteforge.app/sitemap.xml",
-    host: "https://emoteforge.app",
+    sitemap: "https://www.emoteforge.app/sitemap.xml",
+    host: "https://www.emoteforge.app",
   };
 }
 

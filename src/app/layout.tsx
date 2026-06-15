@@ -21,7 +21,7 @@ const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 const GOOGLE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://emoteforge.app"),
+  metadataBase: new URL("https://www.emoteforge.app"),
   title: {
     default: "EmoteForge — Free Twitch & Kick Emote and Badge Maker",
     template: "%s | EmoteForge",
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
       "Create perfectly-sized Twitch and Kick emotes and badges for free. 100% browser-based and private.",
     type: "website",
     siteName: "EmoteForge",
-    url: "https://emoteforge.app",
+    url: "https://www.emoteforge.app",
     locale: "en_US",
   },
   twitter: {
@@ -95,7 +95,7 @@ export const metadata: Metadata = {
       google: GOOGLE_VERIFICATION,
     },
   }),
-  authors: [{ name: "EmoteForge", url: "https://emoteforge.app" }],
+  authors: [{ name: "EmoteForge", url: "https://www.emoteforge.app" }],
   creator: "EmoteForge",
   publisher: "EmoteForge",
   category: "Technology",
