@@ -30,7 +30,7 @@ export default function SiteFooter() {
             <a
               href="https://raogy.com"
               target="_blank"
-              rel="nofollow noopener noreferrer"
+              rel="noopener noreferrer"
               className="font-semibold text-violet-400 transition hover:text-violet-300"
             >
               RAOGY
