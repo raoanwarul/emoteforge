@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ASSET_LIST } from "@/lib/specs";
+import { POSTS_SORTED } from "@/lib/blog";
 
 const toolLinks: Record<string, string> = {
   "twitch-emote": "/twitch-emote-maker",
@@ -164,6 +165,45 @@ export default function Home() {
               <p className="mt-2 text-sm text-zinc-400">{spec.description}</p>
               <div className="mt-4 text-sm font-medium text-zinc-300 group-hover:text-violet-400">
                 Open tool →
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Guides & Tutorials */}
+      <section className="border-t border-zinc-900 py-16 pb-20">
+        <div className="mb-10 text-center">
+          <h2 className="text-2xl font-semibold text-zinc-100 sm:text-3xl">
+            Emote guides &amp; tutorials
+          </h2>
+          <p className="mx-auto mt-2 max-w-xl text-sm text-zinc-400">
+            Learn about exact dimensions, requirements, animation tricks, and specifications for Twitch and Kick.
+          </p>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-3">
+          {POSTS_SORTED.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group flex flex-col rounded-2xl border border-zinc-800 bg-zinc-900/20 p-6 transition hover:border-violet-500 hover:bg-zinc-900/40"
+            >
+              <div className="flex items-center gap-3">
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-zinc-800/80 text-xl">
+                  {post.hero}
+                </span>
+                <span className="rounded-full bg-violet-600/15 px-2.5 py-0.5 text-xs font-medium text-violet-300">
+                  {post.tag}
+                </span>
+              </div>
+              <h3 className="mt-4 font-semibold text-zinc-100 group-hover:text-violet-300">
+                {post.title}
+              </h3>
+              <p className="mt-2 flex-1 text-xs leading-relaxed text-zinc-400">
+                {post.description}
+              </p>
+              <div className="mt-4 text-xs font-medium text-zinc-300 group-hover:text-violet-400">
+                Read guide →
               </div>
             </Link>
           ))}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ToolPage from "@/components/ToolPage";
 
 export const metadata: Metadata = {
-  title: "Twitch Sub Badge Maker — Free 18, 36, 72 px Generator",
+  title: "Twitch Sub Badge Maker — Free Badge Generator",
   description:
     "Create Twitch subscriber badges for free in all required sizes (18, 36, 72 px). Transparent PNG under 25 KB, private and instant.",
   alternates: { canonical: "/twitch-sub-badge-maker" },

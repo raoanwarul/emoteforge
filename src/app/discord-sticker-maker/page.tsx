@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ToolPage from "@/components/ToolPage";
 
 export const metadata: Metadata = {
-  title: "Discord Sticker Maker — Free 320×320 Sticker Generator",
+  title: "Discord Sticker Maker — Free 320px Sticker Generator",
   description:
     "Create Discord stickers for free at 320×320 px. Transparent PNG under 512 KB, instant and private — no upload, no signup.",
   alternates: { canonical: "/discord-sticker-maker" },

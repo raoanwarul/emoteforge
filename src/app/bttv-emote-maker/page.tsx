@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ToolPage from "@/components/ToolPage";
 
 export const metadata: Metadata = {
-  title: "BTTV / FFZ Emote Maker — Free 28, 56, 112 px Generator",
+  title: "BTTV & FFZ Emote Maker — Free Emote Generator",
   description:
     "Create BetterTTV and FrankerFaceZ emotes for free in 28, 56 and 112 px. Transparent PNG/GIF, under 2.5 MB, private and instant.",
   alternates: { canonical: "/bttv-emote-maker" },

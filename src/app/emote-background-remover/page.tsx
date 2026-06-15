@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ToolPage from "@/components/ToolPage";
 
 export const metadata: Metadata = {
-  title: "Free Emote Background Remover — Make Transparent Emotes",
+  title: "Free Emote Background Remover — Transparent Emotes",
   description:
     "Remove the background from any image and export a clean, transparent emote in every required size. 100% in-browser, private and free.",
   alternates: { canonical: "/emote-background-remover" },

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getAllAffiliates } from "@/lib/affiliates";
 
 export const metadata: Metadata = {
-  title: "Recommended Streamer Tools & Assets — EmoteForge",
+  title: "Recommended Streamer Tools & Assets",
   description:
     "Hand-picked tools, asset packs and services for Twitch, Kick, YouTube and Discord streamers — emotes, overlays, alerts, stream-safe music and gear.",
   alternates: { canonical: "/recommended" },

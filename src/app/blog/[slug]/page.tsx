@@ -135,7 +135,7 @@ export default async function BlogPostPage({ params }: Params) {
             {post.tag}
           </span>
           <span>
-            {new Date(post.date).toLocaleDateString("en-US", {
+            By EmoteForge Team · {new Date(post.date).toLocaleDateString("en-US", {
               year: "numeric",
               month: "short",
               day: "numeric",

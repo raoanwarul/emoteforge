@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import BulkStudio from "@/components/BulkStudio";
 
 export const metadata: Metadata = {
-  title: "Bulk Emote Pack Maker — Resize a Whole Emote Set at Once",
+  title: "Bulk Emote Pack Maker — Resize Entire Emote Sets",
   description:
     "Upload your entire emote set and export every required size for all of them in one ZIP. Fast, private, browser-based bulk emote and badge processing.",
   alternates: { canonical: "/bulk-emote-pack" },

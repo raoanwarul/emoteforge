@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ToolPage from "@/components/ToolPage";
 
 export const metadata: Metadata = {
-  title: "Twitch Emote Maker — Free 28x28, 56x56, 112x112 Generator",
+  title: "Twitch Emote Maker — Free 28, 56, 112px Resizer",
   description:
     "Make Twitch emotes for free in all three required sizes (28, 56, 112 px). Transparent PNG, under 1 MB, instant and private. No upload, no signup.",
   alternates: { canonical: "/twitch-emote-maker" },

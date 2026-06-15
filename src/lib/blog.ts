@@ -145,7 +145,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     slug: "twitch-vs-kick-emote-specs",
-    title: "Twitch vs Kick Emotes: Sizes, Limits and How to Reuse Art",
+    title: "Twitch vs Kick Emotes: Sizes, Limits & Reuse Guide",
     description:
       "A side-by-side comparison of Twitch and Kick emote specifications, and how to export one piece of art for both platforms in seconds.",
     date: "2026-03-09",

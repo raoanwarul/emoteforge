@@ -76,7 +76,7 @@ const SEED: AffiliateSeed[] = [
     blurb: "Premium overlays, alerts and emote packs trusted by thousands of streamers.",
     cta: "Shop premium packs",
     icon: "🔥",
-    fallbackUrl: "https://www.own3d.tv?deal=rao",
+    fallbackUrl: "https://www.own3d.tv/en/?deal=rao",
     contexts: ["emotes", "overlays", "export", "general"],
     priority: 85,
   },
