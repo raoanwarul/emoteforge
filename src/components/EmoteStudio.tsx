@@ -1200,7 +1200,7 @@ function CollapsibleSection({
       <button
         type="button"
         onClick={onToggle}
-        className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-zinc-300 hover:text-white hover:bg-zinc-800/40 transition-colors cursor-pointer"
+        className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-zinc-300 hover:text-zinc-50 hover:bg-zinc-800/40 transition-colors cursor-pointer"
       >
         <span>{title}</span>
         <svg
