@@ -102,10 +102,7 @@ export default function EmoteStudio({ specId }: Props) {
 
   // Synchronize chat mockup theme with the site theme on load
   useEffect(() => {
-    const isDark = document.documentElement.classList.contains("dark");
-    queueMicrotask(() => {
-      setDarkPreview(isDark);
-    });
+    setDarkPreview(document.documentElement.classList.contains("dark"));
   }, []);
 
   // Load a shared preset from the URL (?p=...) on first mount.
@@ -217,9 +214,7 @@ export default function EmoteStudio({ specId }: Props) {
   // Auto-process when file/options change (static is fast).
   useEffect(() => {
     if (working && !animated) {
-      queueMicrotask(() => {
-        runProcess();
-      });
+      runProcess();
     }
   }, [working, animated, opts, runProcess]);
 

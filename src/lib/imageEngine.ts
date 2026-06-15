@@ -494,10 +494,11 @@ export async function processStatic(
     source = tempBitmap;
   }
 
-  const sizes: RenderedSize[] = [];
-  for (const size of targetSizes) {
-    sizes.push(await renderSize(source, srcW, srcH, size, opts, format, maxBytes));
-  }
+  const sizes = await Promise.all(
+    targetSizes.map((size) =>
+      renderSize(source, srcW, srcH, size, opts, format, maxBytes),
+    ),
+  );
   if (tempBitmap) {
     tempBitmap.close();
   }
@@ -534,11 +535,11 @@ export async function generateBadgeTiers(
   format: "png" | "webp" = "png",
   maxBytes?: number,
 ): Promise<{ label: string; result: ProcessResult }[]> {
-  const results: { label: string; result: ProcessResult }[] = [];
-  for (const tier of BADGE_TIER_PRESETS) {
-    const tierOpts = { ...baseOpts, hueRotate: tier.hueRotate };
-    const result = await processStatic(file, targetSizes, tierOpts, format, maxBytes);
-    results.push({ label: tier.label, result });
-  }
-  return results;
+  return Promise.all(
+    BADGE_TIER_PRESETS.map(async (tier) => {
+      const tierOpts = { ...baseOpts, hueRotate: tier.hueRotate };
+      const result = await processStatic(file, targetSizes, tierOpts, format, maxBytes);
+      return { label: tier.label, result };
+    }),
+  );
 }
