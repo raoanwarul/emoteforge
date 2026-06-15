@@ -150,7 +150,7 @@ export async function makeAnimated(
   const largest = Math.max(...targetSizes);
   const frameSize = largest;
   onProgress?.("Rendering animation frames…");
-  const frameBlobs: Uint8Array[] = [];
+  const framePromises: Promise<Uint8Array>[] = [];
 
   for (let i = 0; i < totalFrames; i++) {
     const f = transforms[i];
@@ -210,9 +210,22 @@ export async function makeAnimated(
       ctx.putImageData(imgData, 0, 0);
     }
 
-    const blob = await new Promise<Blob>((res) => canvas.toBlob((b) => res(b!), "image/png"));
-    frameBlobs.push(new Uint8Array(await blob.arrayBuffer()));
+    framePromises.push(
+      new Promise<Uint8Array>((resolve) => {
+        canvas.toBlob((blob) => {
+          if (!blob) {
+            resolve(new Uint8Array());
+            return;
+          }
+          blob.arrayBuffer().then((buf) => {
+            resolve(new Uint8Array(buf));
+          });
+        }, "image/png");
+      })
+    );
   }
+
+  const frameBlobs = await Promise.all(framePromises);
   bmp.close?.();
 
   // Write frames to ffmpeg vfs.
@@ -220,19 +233,49 @@ export async function makeAnimated(
     await ff.writeFile(`frame_${String(i + 1).padStart(4, "0")}.png`, frameBlobs[i]);
   }
 
-  const sizes: RenderedSize[] = [];
+  onProgress?.("Encoding animated GIFs…");
+
+  // Construct single ffmpeg complex filter command to process all sizes in one run.
+  let filterComplex = "";
+  if (targetSizes.length === 1) {
+    const size = targetSizes[0];
+    filterComplex = `[0:v]fps=${fps},scale=${size}:${size}:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=128:reserve_transparent=1[p];[s1][p]paletteuse=dither=bayer:bayer_scale=5:alpha_threshold=128[out_${size}]`;
+  } else {
+    const filterParts: string[] = [];
+    const splitStreams: string[] = [];
+    for (let i = 0; i < targetSizes.length; i++) {
+      splitStreams.push(`[v${i}]`);
+    }
+    filterParts.push(`[0:v]split=${targetSizes.length}${splitStreams.join("")}`);
+
+    for (let i = 0; i < targetSizes.length; i++) {
+      const size = targetSizes[i];
+      const instream = `[v${i}]`;
+      const outstream = `[out_${size}]`;
+      filterParts.push(
+        `${instream}fps=${fps},scale=${size}:${size}:flags=lanczos,split[s0_${size}][s1_${size}];` +
+        `[s0_${size}]palettegen=max_colors=128:reserve_transparent=1[p_${size}];` +
+        `[s1_${size}][p_${size}]paletteuse=dither=bayer:bayer_scale=5:alpha_threshold=128${outstream}`
+      );
+    }
+    filterComplex = filterParts.join(";");
+  }
+
+  const args = [
+    "-framerate", String(fps),
+    "-i", "frame_%04d.png",
+    "-filter_complex", filterComplex,
+  ];
 
   for (const size of targetSizes) {
-    onProgress?.(`Encoding ${size}px GIF…`);
+    args.push("-map", `[out_${size}]`, "-loop", "0", `anim_${size}.gif`);
+  }
+
+  await ff.exec(args);
+
+  const sizes: RenderedSize[] = [];
+  for (const size of targetSizes) {
     const out = `anim_${size}.gif`;
-    const vf = `fps=${fps},scale=${size}:${size}:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=128:reserve_transparent=1[p];[s1][p]paletteuse=dither=bayer:bayer_scale=5:alpha_threshold=128`;
-    await ff.exec([
-      "-framerate", String(fps),
-      "-i", "frame_%04d.png",
-      "-vf", vf,
-      "-loop", "0",
-      out,
-    ]);
     const data = await ff.readFile(out);
     const bytes = new Uint8Array(data.length);
     bytes.set(data);

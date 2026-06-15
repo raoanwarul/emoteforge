@@ -42,6 +42,7 @@ export default function EmoteStudio({ specId }: Props) {
   const [file, setFile] = useState<File | null>(null);
   const [working, setWorking] = useState<Blob | null>(null);
   const [animated, setAnimated] = useState(false);
+  const [activeAnimation, setActiveAnimation] = useState<AnimationPreset | null>(null);
   const [result, setResult] = useState<ProcessResult | null>(null);
   const [busy, setBusy] = useState(false);
   const [progress, setProgress] = useState("");
@@ -152,6 +153,7 @@ export default function EmoteStudio({ specId }: Props) {
       setBgRemoved(false);
       const anim = isAnimatedFile(f) && spec.animatedSupported;
       setAnimated(anim);
+      setActiveAnimation(null);
       if (remember) {
         saveRecent(f).then(() => listRecent().then(setRecent));
       }
@@ -245,8 +247,9 @@ export default function EmoteStudio({ specId }: Props) {
       setBgRemoved(false);
       const anim = isAnimatedFile(file) && spec.animatedSupported;
       setAnimated(anim);
+      setActiveAnimation(null);
     }
-  }, [file, spec.animatedSupported, setWorking, setBgRemoved, setAnimated]);
+  }, [file, spec.animatedSupported, setWorking, setBgRemoved, setAnimated, setActiveAnimation]);
 
   const downloadZip = useCallback(async () => {
     if (!result) return;
@@ -264,6 +267,13 @@ export default function EmoteStudio({ specId }: Props) {
     result && spec.maxBytes
       ? result.sizes.every((s) => s.bytes <= spec.maxBytes!)
       : true;
+
+  const getAnimationClass = () => {
+    if (busy && activeAnimation) {
+      return `animate-preset-${activeAnimation}`;
+    }
+    return "";
+  };
 
   const renderPreviewCard = () => {
     if (!result) return null;
@@ -286,6 +296,7 @@ export default function EmoteStudio({ specId }: Props) {
           smallUrl={result.sizes[0]?.url ?? ""}
           dark={darkPreview}
           isBadge={spec.id.includes("badge")}
+          animationClass={getAnimationClass()}
         />
       </div>
     );
@@ -309,6 +320,7 @@ export default function EmoteStudio({ specId }: Props) {
                   <img
                     src={s.url}
                     alt={`${s.size}px`}
+                    className={getAnimationClass()}
                     style={{ width: Math.min(s.size, 64), height: Math.min(s.size, 64), imageRendering: "auto" }}
                   />
                 </div>
@@ -923,6 +935,7 @@ export default function EmoteStudio({ specId }: Props) {
                             if (!working) return;
                             setBusy(true);
                             try {
+                              setActiveAnimation(p);
                               const res = await makeAnimated(working, spec.sizes, p, setProgress);
                               setResult((prev) => {
                                 if (prev) revokeResult(prev);
@@ -932,6 +945,7 @@ export default function EmoteStudio({ specId }: Props) {
                               track("make_animated", { preset: p, spec: spec.id });
                             } catch (e) {
                               setError((e as Error).message || "Animation failed.");
+                              setActiveAnimation(null);
                             } finally {
                               setBusy(false);
                               setProgress("");
@@ -1038,6 +1052,7 @@ export default function EmoteStudio({ specId }: Props) {
                                 if (!working) return;
                                 setBusy(true);
                                 try {
+                                  setActiveAnimation(p as AnimationPreset);
                                   const res = await makeAnimated(working, spec.sizes, p as AnimationPreset, setProgress);
                                   setResult((prev) => {
                                     if (prev) revokeResult(prev);
@@ -1047,6 +1062,7 @@ export default function EmoteStudio({ specId }: Props) {
                                   track("make_animated", { preset: p, spec: spec.id });
                                 } catch (e) {
                                   setError((e as Error).message || "Animation failed.");
+                                  setActiveAnimation(null);
                                 } finally {
                                   setBusy(false);
                                   setProgress("");
@@ -1230,11 +1246,13 @@ function ChatMockup({
   smallUrl,
   dark,
   isBadge,
+  animationClass = "",
 }: {
   url: string;
   smallUrl: string;
   dark: boolean;
   isBadge: boolean;
+  animationClass?: string;
 }) {
   const size = isBadge ? 18 : 28;
   return (
@@ -1249,7 +1267,7 @@ function ChatMockup({
         </span>
         <span className={dark ? "text-[#adadb8]" : "text-[#53535f]"}>nice clutch</span>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={smallUrl} alt="" className="inline-block align-middle" style={{ width: size, height: size }} />
+        <img src={smallUrl} alt="" className={`inline-block align-middle ${animationClass}`} style={{ width: size, height: size }} />
       </div>
       <div className="flex items-center gap-2">
         <span className={`font-semibold ${dark ? "text-[#00f593]" : "text-[#008048]"}`}>
@@ -1257,9 +1275,9 @@ function ChatMockup({
         </span>
         <span className={dark ? "text-[#adadb8]" : "text-[#53535f]"}>GG</span>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={url} alt="" className="inline-block align-middle" style={{ width: size, height: size }} />
+        <img src={url} alt="" className={`inline-block align-middle ${animationClass}`} style={{ width: size, height: size }} />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={smallUrl} alt="" className="inline-block align-middle" style={{ width: size, height: size }} />
+        <img src={smallUrl} alt="" className={`inline-block align-middle ${animationClass}`} style={{ width: size, height: size }} />
       </div>
     </div>
   );

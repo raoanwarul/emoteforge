@@ -436,6 +436,57 @@ async function renderSize(
   return { size, blob, url: URL.createObjectURL(blob), bytes: blob.size };
 }
 
+interface CacheKeys {
+  file: Blob;
+  trim: boolean;
+  cropX: number;
+  cropY: number;
+  cropW: number;
+  cropH: number;
+  rotate: number;
+  flipH: boolean;
+  flipV: boolean;
+}
+
+interface SourceCache extends CacheKeys {
+  bitmap: ImageBitmap;
+  trimBounds: { x: number; y: number; w: number; h: number };
+  source: CanvasImageSource;
+  srcW: number;
+  srcH: number;
+}
+
+let currentCache: SourceCache | null = null;
+let pendingCachePromise: { keys: CacheKeys; promise: Promise<SourceCache> } | null = null;
+
+function getPendingCachePromise() {
+  return pendingCachePromise;
+}
+
+function clearCache() {
+  if (currentCache) {
+    currentCache.bitmap.close?.();
+    if (currentCache.source instanceof ImageBitmap && currentCache.source !== currentCache.bitmap) {
+      currentCache.source.close?.();
+    }
+    currentCache = null;
+  }
+}
+
+function keysMatch(k1: CacheKeys, k2: CacheKeys): boolean {
+  return (
+    k1.file === k2.file &&
+    k1.trim === k2.trim &&
+    k1.cropX === k2.cropX &&
+    k1.cropY === k2.cropY &&
+    k1.cropW === k2.cropW &&
+    k1.cropH === k2.cropH &&
+    k1.rotate === k2.rotate &&
+    k1.flipH === k2.flipH &&
+    k1.flipV === k2.flipV
+  );
+}
+
 export interface ProcessResult {
   sizes: RenderedSize[];
 }
@@ -448,61 +499,114 @@ export async function processStatic(
   format: "png" | "webp" = "png",
   maxBytes?: number,
 ): Promise<ProcessResult> {
-  const bitmap = await decodeImage(file);
+  const keys: CacheKeys = {
+    file,
+    trim: opts.trim,
+    cropX: opts.crop.x,
+    cropY: opts.crop.y,
+    cropW: opts.crop.w,
+    cropH: opts.crop.h,
+    rotate: opts.rotate,
+    flipH: opts.flipH,
+    flipV: opts.flipV,
+  };
 
-  let source: CanvasImageSource = bitmap;
-  let srcW = bitmap.width;
-  let srcH = bitmap.height;
+  let cache: SourceCache;
 
-  if (opts.trim) {
-    const b = getTrimBounds(bitmap);
-    const trimmed = document.createElement("canvas");
-    trimmed.width = b.w;
-    trimmed.height = b.h;
-    trimmed.getContext("2d")!.drawImage(bitmap, b.x, b.y, b.w, b.h, 0, 0, b.w, b.h);
-    source = trimmed;
-    srcW = b.w;
-    srcH = b.h;
+  if (currentCache && keysMatch(currentCache, keys)) {
+    cache = currentCache;
+  } else if (pendingCachePromise && keysMatch(pendingCachePromise.keys, keys)) {
+    cache = await pendingCachePromise.promise;
+  } else {
+    // Need to build a new one. Discard old current cache.
+    clearCache();
+    pendingCachePromise = null;
+
+    const promise = (async () => {
+      const bitmap = await decodeImage(file);
+      let tempSource: CanvasImageSource = bitmap;
+      let tempSrcW = bitmap.width;
+      let tempSrcH = bitmap.height;
+      
+      let trimBounds = { x: 0, y: 0, w: bitmap.width, h: bitmap.height };
+      if (opts.trim) {
+        trimBounds = getTrimBounds(bitmap);
+        const trimmed = document.createElement("canvas");
+        trimmed.width = trimBounds.w;
+        trimmed.height = trimBounds.h;
+        trimmed.getContext("2d")!.drawImage(bitmap, trimBounds.x, trimBounds.y, trimBounds.w, trimBounds.h, 0, 0, trimBounds.w, trimBounds.h);
+        tempSource = trimmed;
+        tempSrcW = trimBounds.w;
+        tempSrcH = trimBounds.h;
+      }
+
+      // Apply crop (fractions of source dimensions).
+      const c = opts.crop;
+      if (c.x !== 0 || c.y !== 0 || c.w !== 1 || c.h !== 1) {
+        const cx = Math.round(tempSrcW * clamp(c.x, 0, 1));
+        const cy = Math.round(tempSrcH * clamp(c.y, 0, 1));
+        const cw = Math.max(1, Math.round(tempSrcW * clamp(c.w, 0.01, 1)));
+        const ch = Math.max(1, Math.round(tempSrcH * clamp(c.h, 0.01, 1)));
+        const cropped = document.createElement("canvas");
+        cropped.width = cw;
+        cropped.height = ch;
+        cropped.getContext("2d")!.drawImage(tempSource, cx, cy, cw, ch, 0, 0, cw, ch);
+        tempSource = cropped;
+        tempSrcW = cw;
+        tempSrcH = ch;
+      }
+
+      // Apply rotation / mirroring before fitting into the square.
+      const oriented = orientSource(tempSource, tempSrcW, tempSrcH, opts.rotate, opts.flipH, opts.flipV);
+      tempSource = oriented.source;
+      tempSrcW = oriented.w;
+      tempSrcH = oriented.h;
+
+      // Convert canvas source to ImageBitmap to bypass Safari filter drawImage bug
+      let finalSource: CanvasImageSource = tempSource;
+      if (tempSource instanceof HTMLCanvasElement) {
+        finalSource = await createImageBitmap(tempSource);
+      }
+
+      const newCache: SourceCache = {
+        ...keys,
+        bitmap,
+        trimBounds,
+        source: finalSource,
+        srcW: tempSrcW,
+        srcH: tempSrcH,
+      };
+
+      // Once resolved, if we are still the pending promise, promote to currentCache
+      const pending = getPendingCachePromise();
+      if (pending && keysMatch(pending.keys, keys)) {
+        currentCache = newCache;
+        pendingCachePromise = null;
+      } else {
+        // We were discarded before resolving. Clean up to avoid leak.
+        newCache.bitmap.close?.();
+        if (newCache.source instanceof ImageBitmap && newCache.source !== newCache.bitmap) {
+          newCache.source.close?.();
+        }
+      }
+
+      return newCache;
+    })();
+
+    pendingCachePromise = { keys, promise };
+    cache = await promise;
   }
 
-  // Apply crop (fractions of source dimensions).
-  const c = opts.crop;
-  if (c.x !== 0 || c.y !== 0 || c.w !== 1 || c.h !== 1) {
-    const cx = Math.round(srcW * clamp(c.x, 0, 1));
-    const cy = Math.round(srcH * clamp(c.y, 0, 1));
-    const cw = Math.max(1, Math.round(srcW * clamp(c.w, 0.01, 1)));
-    const ch = Math.max(1, Math.round(srcH * clamp(c.h, 0.01, 1)));
-    const cropped = document.createElement("canvas");
-    cropped.width = cw;
-    cropped.height = ch;
-    cropped.getContext("2d")!.drawImage(source, cx, cy, cw, ch, 0, 0, cw, ch);
-    source = cropped;
-    srcW = cw;
-    srcH = ch;
-  }
-
-  // Apply rotation / mirroring before fitting into the square.
-  const oriented = orientSource(source, srcW, srcH, opts.rotate, opts.flipH, opts.flipV);
-  source = oriented.source;
-  srcW = oriented.w;
-  srcH = oriented.h;
-
-  // Convert canvas source to ImageBitmap to bypass Safari filter drawImage bug
-  let tempBitmap: ImageBitmap | null = null;
-  if (source instanceof HTMLCanvasElement) {
-    tempBitmap = await createImageBitmap(source);
-    source = tempBitmap;
-  }
+  const source = cache.source;
+  const srcW = cache.srcW;
+  const srcH = cache.srcH;
 
   const sizes = await Promise.all(
     targetSizes.map((size) =>
       renderSize(source, srcW, srcH, size, opts, format, maxBytes),
     ),
   );
-  if (tempBitmap) {
-    tempBitmap.close();
-  }
-  bitmap.close?.();
+
   return { sizes };
 }
 

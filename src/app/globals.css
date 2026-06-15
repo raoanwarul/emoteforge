@@ -92,3 +92,114 @@ body {
   background-position: 0 0, 0 8px, 8px -8px, -8px 0;
   background-color: var(--checker-b);
 }
+
+/* Preset CSS Animations for Instant Visual Preview */
+@keyframes preset-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15%); }
+}
+.animate-preset-bounce {
+  animation: preset-bounce 1s infinite ease-in-out;
+}
+
+@keyframes preset-shake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-6%) rotate(-5deg); }
+  75% { transform: translateX(6%) rotate(5deg); }
+}
+.animate-preset-shake {
+  animation: preset-shake 0.3s infinite ease-in-out;
+}
+
+@keyframes preset-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+.animate-preset-pulse {
+  animation: preset-pulse 1s infinite ease-in-out;
+}
+
+@keyframes preset-rainbow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+.animate-preset-rainbow {
+  animation: preset-rainbow 2s infinite linear;
+}
+
+@keyframes preset-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.animate-preset-spin {
+  animation: preset-spin 2s infinite linear;
+}
+
+@keyframes preset-wobble {
+  0%, 100% { transform: translateX(0) rotate(0deg) scale(1); }
+  25% { transform: translateX(-5%) rotate(-8deg) scale(1.05); }
+  75% { transform: translateX(5%) rotate(8deg) scale(1.05); }
+}
+.animate-preset-wobble {
+  animation: preset-wobble 1s infinite ease-in-out;
+}
+
+@keyframes preset-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+.animate-preset-wiggle {
+  animation: preset-wiggle 0.4s infinite ease-in-out;
+}
+
+@keyframes preset-zoom {
+  0%, 100% { transform: scale(0.75); }
+  50% { transform: scale(1.25); }
+}
+.animate-preset-zoom {
+  animation: preset-zoom 1.5s infinite ease-in-out;
+}
+
+@keyframes preset-rave {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); filter: hue-rotate(0deg); }
+  20% { transform: translate(-5%, 5%) rotate(-3deg) scale(1.05); filter: hue-rotate(72deg); }
+  40% { transform: translate(5%, -5%) rotate(3deg) scale(0.95); filter: hue-rotate(144deg); }
+  60% { transform: translate(-3%, -3%) rotate(-2deg) scale(1.08); filter: hue-rotate(216deg); }
+  80% { transform: translate(3%, 3%) rotate(2deg) scale(0.92); filter: hue-rotate(288deg); }
+}
+.animate-preset-rave {
+  animation: preset-rave 0.8s infinite linear;
+}
+
+@keyframes preset-slide {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-20%); }
+}
+.animate-preset-slide {
+  animation: preset-slide 1s infinite ease-in-out;
+}
+
+@keyframes preset-roll {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(10%, 10%) rotate(90deg); }
+  50% { transform: translate(0, 20%) rotate(180deg); }
+  75% { transform: translate(-10%, 10%) rotate(270deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+.animate-preset-roll {
+  animation: preset-roll 1.5s infinite linear;
+}
+
+@keyframes preset-glitch {
+  0%, 100% { transform: translate(0, 0) scale(1.05) rotate(0deg); filter: hue-rotate(0deg); }
+  10% { transform: translate(5%, -5%) scale(0.9) rotate(8deg); filter: hue-rotate(45deg); }
+  20% { transform: translate(-5%, 5%) scale(1.05) rotate(-8deg); filter: hue-rotate(-45deg); }
+  30% { transform: translate(0, 0) scale(1) rotate(0deg); filter: hue-rotate(0deg); }
+  40% { transform: translate(3%, 3%) scale(1.05) rotate(5deg); }
+  50% { transform: translate(-3%, -3%) scale(0.9) rotate(-5deg); }
+  60% { transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+.animate-preset-glitch {
+  animation: preset-glitch 0.5s infinite linear;
+}
