@@ -203,3 +203,46 @@ body {
 .animate-preset-glitch {
   animation: preset-glitch 0.5s infinite linear;
 }
+
+@keyframes preset-heartbeat {
+  0%, 60%, 100% { transform: scale(1); }
+  15% { transform: scale(1.15); }
+  30% { transform: scale(1.10); }
+}
+.animate-preset-heartbeat {
+  animation: preset-heartbeat 1s infinite ease-in-out;
+}
+
+@keyframes preset-jelly {
+  0%, 100% { transform: scale(1, 1); }
+  25% { transform: scale(1.15, 0.85); }
+  50% { transform: scale(0.85, 1.15); }
+  75% { transform: scale(1.05, 0.95); }
+}
+.animate-preset-jelly {
+  animation: preset-jelly 1s infinite ease-in-out;
+}
+
+@keyframes preset-float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(5%, -10%) rotate(4deg); }
+}
+.animate-preset-float {
+  animation: preset-float 2s infinite ease-in-out;
+}
+
+@keyframes preset-hyperspin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(1080deg); }
+}
+.animate-preset-hyperspin {
+  animation: preset-hyperspin 1s infinite linear;
+}
+
+@keyframes preset-rainbowspin {
+  0% { transform: rotate(0deg); filter: hue-rotate(0deg); }
+  100% { transform: rotate(360deg); filter: hue-rotate(360deg); }
+}
+.animate-preset-rainbowspin {
+  animation: preset-rainbowspin 2s infinite linear;
+}

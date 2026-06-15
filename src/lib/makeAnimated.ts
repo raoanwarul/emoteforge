@@ -45,12 +45,19 @@ export type AnimationPreset =
   | "rave"
   | "slide"
   | "roll"
-  | "glitch";
+  | "glitch"
+  | "heartbeat"
+  | "jelly"
+  | "float"
+  | "hyperspin"
+  | "rainbowspin";
 
 interface FrameTransform {
   offsetX: number;
   offsetY: number;
   scale: number;
+  scaleX?: number;
+  scaleY?: number;
   rotation: number; // degrees
   hue: number; // degrees
 }
@@ -121,6 +128,32 @@ function generateFrames(preset: AnimationPreset, totalFrames: number): FrameTran
           hue: 0,
         });
         break;
+      case "heartbeat": {
+        const pulse = t < 0.3 ? Math.sin((t / 0.3) * Math.PI) * 0.15 : t < 0.6 ? Math.sin(((t - 0.3) / 0.3) * Math.PI) * 0.08 : 0;
+        frames.push({ offsetX: 0, offsetY: 0, scale: 1 + pulse, rotation: 0, hue: 0 });
+        break;
+      }
+      case "jelly": {
+        const jellyX = 1 + Math.sin(angle) * 0.15;
+        const jellyY = 1 - Math.sin(angle) * 0.15;
+        frames.push({ offsetX: 0, offsetY: 0, scale: 1, scaleX: jellyX, scaleY: jellyY, rotation: 0, hue: 0 });
+        break;
+      }
+      case "float":
+        frames.push({
+          offsetX: Math.sin(angle) * 0.05,
+          offsetY: -0.05 + Math.cos(angle) * 0.05,
+          scale: 1,
+          rotation: Math.sin(angle) * 4,
+          hue: 0,
+        });
+        break;
+      case "hyperspin":
+        frames.push({ offsetX: 0, offsetY: 0, scale: 1, rotation: t * 360 * 3, hue: 0 });
+        break;
+      case "rainbowspin":
+        frames.push({ offsetX: 0, offsetY: 0, scale: 1, rotation: t * 360, hue: t * 360 });
+        break;
     }
   }
   return frames;
@@ -163,7 +196,7 @@ export async function makeAnimated(
     ctx.save();
     ctx.translate(frameSize / 2 + f.offsetX * frameSize, frameSize / 2 + f.offsetY * frameSize);
     ctx.rotate((f.rotation * Math.PI) / 180);
-    ctx.scale(f.scale, f.scale);
+    ctx.scale(f.scaleX ?? f.scale, f.scaleY ?? f.scale);
 
     const ratio = bmp.width / bmp.height;
     let dw = frameSize * 0.8;

@@ -926,6 +926,11 @@ export default function EmoteStudio({ specId }: Props) {
                         "slide",
                         "roll",
                         "glitch",
+                        "heartbeat",
+                        "jelly",
+                        "float",
+                        "hyperspin",
+                        "rainbowspin",
                       ] as AnimationPreset[]).map((p) => (
                         <button
                           key={p}
@@ -1043,6 +1048,11 @@ export default function EmoteStudio({ specId }: Props) {
                             "slide",
                             "roll",
                             "glitch",
+                            "heartbeat",
+                            "jelly",
+                            "float",
+                            "hyperspin",
+                            "rainbowspin",
                           ].map((p) => (
                             <button
                               key={p}
