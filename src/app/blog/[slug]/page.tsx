@@ -173,7 +173,7 @@ export default async function BlogPostPage({ params }: Params) {
             ← All guides
           </Link>
 
-          <header className="mt-6 rounded-[28px] border border-zinc-800/80 bg-gradient-to-br from-violet-500/10 via-zinc-950 to-zinc-900 p-7 shadow-[0_18px_48px_rgba(24,24,27,0.10)] dark:shadow-[0_22px_70px_rgba(0,0,0,0.28)] sm:p-9">
+          <header className="mt-6 rounded-[28px] border border-zinc-800/80 bg-[radial-gradient(circle_at_top,_rgba(139,92,246,0.12),_transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.98),rgba(244,244,245,0.98))] p-7 shadow-[0_18px_48px_rgba(24,24,27,0.10)] sm:p-9">
             <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-400">
               <span className="rounded-full border border-violet-400/40 bg-violet-500/10 px-3 py-1 font-semibold uppercase tracking-[0.18em] text-violet-700 dark:border-violet-500/20 dark:bg-violet-600/15 dark:text-violet-300">
                 {post.tag}

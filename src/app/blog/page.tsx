@@ -20,8 +20,8 @@ function formatDate(iso: string): string {
 export default function BlogIndex() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12">
-      <header className="mb-10 rounded-[28px] border border-zinc-800 bg-[radial-gradient(circle_at_top,_rgba(139,92,246,0.16),_transparent_42%),linear-gradient(180deg,rgba(24,24,27,0.95),rgba(9,9,11,0.92))] px-6 py-10 text-center shadow-[0_22px_70px_rgba(0,0,0,0.28)] sm:px-10">
-        <div className="inline-flex rounded-full border border-violet-500/20 bg-violet-600/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-violet-300">
+      <header className="mb-10 rounded-[28px] border border-zinc-800 bg-[radial-gradient(circle_at_top,_rgba(139,92,246,0.12),_transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.98),rgba(244,244,245,0.98))] px-6 py-10 text-center shadow-[0_18px_48px_rgba(24,24,27,0.10)] sm:px-10">
+        <div className="inline-flex rounded-full border border-violet-400/40 bg-violet-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-violet-700 dark:border-violet-500/20 dark:bg-violet-600/10 dark:text-violet-300">
           Editorial Guides
         </div>
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
