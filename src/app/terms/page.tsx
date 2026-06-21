@@ -105,7 +105,7 @@ export default function TermsPage() {
     <div className="mx-auto max-w-3xl px-4 py-16">
       {/* Header */}
       <div className="mb-12">
-        <div className="mb-3 text-xs font-medium uppercase tracking-widest text-violet-400">
+        <div className="mb-3 text-xs font-medium uppercase tracking-widest text-violet-700 dark:text-violet-400">
           Legal
         </div>
         <h1 className="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
@@ -149,7 +149,7 @@ export default function TermsPage() {
               <ul className="mt-3 space-y-2">
                 {section.items.map((item, j) => (
                   <li key={j} className="flex gap-2 text-sm text-zinc-400">
-                    <span className="mt-0.5 text-violet-400">•</span>
+                    <span className="mt-0.5 text-violet-600 dark:text-violet-400">•</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -161,13 +161,13 @@ export default function TermsPage() {
 
       {/* Footer nav */}
       <div className="mt-12 flex flex-wrap gap-4 border-t border-zinc-800 pt-8 text-sm text-zinc-400">
-        <Link href="/privacy-policy" className="hover:text-violet-400">
+        <Link href="/privacy-policy" className="hover:text-violet-700 dark:hover:text-violet-400">
           Privacy Policy
         </Link>
-        <Link href="/contact" className="hover:text-violet-400">
+        <Link href="/contact" className="hover:text-violet-700 dark:hover:text-violet-400">
           Contact Us
         </Link>
-        <Link href="/about" className="hover:text-violet-400">
+        <Link href="/about" className="hover:text-violet-700 dark:hover:text-violet-400">
           About EmoteForge
         </Link>
       </div>

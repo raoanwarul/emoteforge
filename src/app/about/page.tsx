@@ -118,11 +118,11 @@ export default function AboutPage() {
         <ul className="space-y-3">
           {TOOLS.map((tool) => (
             <li key={tool.href} className="flex items-start gap-3 text-sm">
-              <span className="mt-0.5 text-violet-400">→</span>
+              <span className="mt-0.5 text-violet-600 dark:text-violet-400">→</span>
               <span>
                 <Link
                   href={tool.href}
-                  className="font-medium text-zinc-200 hover:text-violet-400"
+                  className="font-medium text-zinc-200 hover:text-violet-700 dark:hover:text-violet-400"
                 >
                   {tool.name}
                 </Link>
@@ -139,7 +139,7 @@ export default function AboutPage() {
           The Creator
         </h2>
         <div className="flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-violet-600/20 text-xl font-bold text-violet-400">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-violet-100 text-xl font-bold text-violet-700 dark:bg-violet-600/20 dark:text-violet-400">
             A
           </div>
           <div className="text-sm leading-relaxed text-zinc-400">
@@ -165,13 +165,13 @@ export default function AboutPage() {
         </Link>
         <Link
           href="/contact"
-          className="rounded-xl border border-zinc-700 px-5 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-violet-500 hover:text-violet-300"
+          className="rounded-xl border border-zinc-700 px-5 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-violet-500 hover:text-violet-700 dark:hover:text-violet-300"
         >
           Contact us
         </Link>
         <Link
           href="/blog"
-          className="rounded-xl border border-zinc-700 px-5 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-violet-500 hover:text-violet-300"
+          className="rounded-xl border border-zinc-700 px-5 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-violet-500 hover:text-violet-700 dark:hover:text-violet-300"
         >
           Read our guides
         </Link>

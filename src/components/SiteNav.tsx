@@ -12,7 +12,7 @@ function Logo() {
         🔥
       </span>
       <span className="text-[15px] font-bold tracking-tight text-zinc-50">
-        Emote<span className="text-violet-400">Forge</span>
+        Emote<span className="text-violet-700 dark:text-violet-400">Forge</span>
       </span>
     </Link>
   );
@@ -20,7 +20,7 @@ function Logo() {
 
 function Badge({ kind }: { kind: "New" }) {
   return (
-    <span className="rounded bg-emerald-600/20 px-1 py-px text-[9px] font-bold uppercase text-emerald-300">
+    <span className="rounded bg-emerald-100 px-1 py-px text-[9px] font-bold uppercase text-emerald-700 dark:bg-emerald-600/20 dark:text-emerald-300">
       {kind}
     </span>
   );

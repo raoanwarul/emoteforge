@@ -37,7 +37,7 @@ export default function ContactPage() {
     <div className="mx-auto max-w-3xl px-4 py-16">
       {/* Header */}
       <div className="mb-12 text-center">
-        <div className="mb-3 text-xs font-medium uppercase tracking-widest text-violet-400">
+        <div className="mb-3 text-xs font-medium uppercase tracking-widest text-violet-700 dark:text-violet-400">
           Get in touch
         </div>
         <h1 className="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
@@ -63,7 +63,7 @@ export default function ContactPage() {
             </p>
             <a
               href="mailto:hello@emoteforge.app"
-              className="mt-2 inline-block text-sm font-semibold text-violet-400 hover:text-violet-300"
+              className="mt-2 inline-block text-sm font-semibold text-violet-700 hover:text-violet-800 dark:text-violet-400 dark:hover:text-violet-300"
             >
               hello@emoteforge.app
             </a>
@@ -115,7 +115,7 @@ export default function ContactPage() {
 
       {/* Links */}
       <div className="flex flex-wrap gap-4 text-sm">
-        <Link href="/about" className="text-violet-400 hover:text-violet-300">
+        <Link href="/about" className="text-violet-700 hover:text-violet-800 dark:text-violet-400 dark:hover:text-violet-300">
           About EmoteForge
         </Link>
         <Link

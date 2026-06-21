@@ -135,7 +135,7 @@ export default function PrivacyPolicyPage() {
     <div className="mx-auto max-w-3xl px-4 py-16">
       {/* Header */}
       <div className="mb-12">
-        <div className="mb-3 text-xs font-medium uppercase tracking-widest text-violet-400">
+        <div className="mb-3 text-xs font-medium uppercase tracking-widest text-violet-700 dark:text-violet-400">
           Legal
         </div>
         <h1 className="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
@@ -218,7 +218,7 @@ export default function PrivacyPolicyPage() {
                             href={row[2]}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-violet-400 underline underline-offset-2 hover:text-violet-300"
+                            className="text-violet-700 underline underline-offset-2 hover:text-violet-800 dark:text-violet-400 dark:hover:text-violet-300"
                           >
                             View
                           </a>
@@ -235,13 +235,13 @@ export default function PrivacyPolicyPage() {
 
       {/* Footer nav */}
       <div className="mt-12 flex flex-wrap gap-4 border-t border-zinc-800 pt-8 text-sm text-zinc-400">
-        <Link href="/terms" className="hover:text-violet-400">
+        <Link href="/terms" className="hover:text-violet-700 dark:hover:text-violet-400">
           Terms of Service
         </Link>
-        <Link href="/contact" className="hover:text-violet-400">
+        <Link href="/contact" className="hover:text-violet-700 dark:hover:text-violet-400">
           Contact Us
         </Link>
-        <Link href="/about" className="hover:text-violet-400">
+        <Link href="/about" className="hover:text-violet-700 dark:hover:text-violet-400">
           About EmoteForge
         </Link>
       </div>

@@ -126,7 +126,7 @@ export default function Home() {
               key={s.step}
               className="relative rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 text-center"
             >
-              <div className="mx-auto mb-3 grid h-10 w-10 place-items-center rounded-full bg-violet-600/20 text-lg font-bold text-violet-400">
+              <div className="mx-auto mb-3 grid h-10 w-10 place-items-center rounded-full bg-violet-100 text-lg font-bold text-violet-700 dark:bg-violet-600/20 dark:text-violet-400">
                 {s.step}
               </div>
               <div className="text-2xl">{s.icon}</div>
@@ -149,10 +149,10 @@ export default function Home() {
               href={toolLinks[spec.id]}
               className="group rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 transition hover:border-violet-500 hover:bg-zinc-900"
             >
-              <div className="text-sm font-semibold text-violet-400">{spec.platform.toUpperCase()}</div>
+              <div className="text-sm font-semibold text-violet-700 dark:text-violet-400">{spec.platform.toUpperCase()}</div>
               <div className="mt-1 text-lg font-semibold text-zinc-100">{spec.label}</div>
               <p className="mt-2 text-sm text-zinc-400">{spec.description}</p>
-              <div className="mt-4 text-sm font-medium text-zinc-300 group-hover:text-violet-400">
+              <div className="mt-4 text-sm font-medium text-zinc-300 group-hover:text-violet-700 dark:group-hover:text-violet-400">
                 Open tool →
               </div>
             </Link>
@@ -181,17 +181,17 @@ export default function Home() {
                 <span className="grid h-10 w-10 place-items-center rounded-xl bg-zinc-800/80 text-xl">
                   {post.hero}
                 </span>
-                <span className="rounded-full bg-violet-600/15 px-2.5 py-0.5 text-xs font-medium text-violet-300">
+                <span className="rounded-full bg-violet-100 px-2.5 py-0.5 text-xs font-medium text-violet-700 dark:bg-violet-600/15 dark:text-violet-300">
                   {post.tag}
                 </span>
               </div>
-              <h3 className="mt-4 font-semibold text-zinc-100 group-hover:text-violet-300">
+              <h3 className="mt-4 font-semibold text-zinc-100 group-hover:text-violet-700 dark:group-hover:text-violet-300">
                 {post.title}
               </h3>
               <p className="mt-2 flex-1 text-xs leading-relaxed text-zinc-400">
                 {post.description}
               </p>
-              <div className="mt-4 text-xs font-medium text-zinc-300 group-hover:text-violet-400">
+              <div className="mt-4 text-xs font-medium text-zinc-300 group-hover:text-violet-700 dark:group-hover:text-violet-400">
                 Read guide →
               </div>
             </Link>
