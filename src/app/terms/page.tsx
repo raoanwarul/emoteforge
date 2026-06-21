@@ -68,9 +68,10 @@ const SECTIONS = [
     ],
   },
   {
-    title: "8. Affiliate Links",
+    title: "8. External Links",
     content: [
-      "EmoteForge may introduce clearly disclosed affiliate links in the future. If that happens, affiliate relationships will not influence our editorial recommendations.",
+      "EmoteForge does not operate an affiliate program of its own. The website may include normal links to third-party services, tools, and documentation for convenience or reference.",
+      "Following an external link does not mean EmoteForge endorses or controls that third-party website.",
     ],
   },
   {

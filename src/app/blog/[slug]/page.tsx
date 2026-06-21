@@ -169,22 +169,22 @@ export default async function BlogPostPage({ params }: Params) {
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
         <div>
-          <Link href="/blog" className="text-sm text-violet-400 hover:underline">
+          <Link href="/blog" className="text-sm text-violet-700 hover:underline dark:text-violet-300">
             ← All guides
           </Link>
 
-          <header className="mt-6 rounded-[28px] border border-zinc-800 bg-[radial-gradient(circle_at_top,_rgba(139,92,246,0.18),_transparent_45%),linear-gradient(180deg,rgba(24,24,27,0.95),rgba(9,9,11,0.92))] p-7 shadow-[0_22px_70px_rgba(0,0,0,0.28)] sm:p-9">
+          <header className="mt-6 rounded-[28px] border border-zinc-800/80 bg-gradient-to-br from-violet-500/10 via-zinc-950 to-zinc-900 p-7 shadow-[0_18px_48px_rgba(24,24,27,0.10)] dark:shadow-[0_22px_70px_rgba(0,0,0,0.28)] sm:p-9">
             <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-400">
-              <span className="rounded-full border border-violet-500/20 bg-violet-600/15 px-3 py-1 font-semibold uppercase tracking-[0.18em] text-violet-300">
+              <span className="rounded-full border border-violet-400/40 bg-violet-500/10 px-3 py-1 font-semibold uppercase tracking-[0.18em] text-violet-700 dark:border-violet-500/20 dark:bg-violet-600/15 dark:text-violet-300">
                 {post.tag}
               </span>
-              <span className="rounded-full border border-zinc-700/80 bg-zinc-900/70 px-3 py-1">
+              <span className="rounded-full border border-zinc-700/80 bg-zinc-950/80 px-3 py-1 text-zinc-500 dark:bg-zinc-900/70 dark:text-zinc-400">
                 {post.readMinutes} min read
               </span>
               <span>
                 By{" "}
                 {post.author ? (
-                  <Link href="/about" className="font-medium text-violet-300 hover:underline">
+                  <Link href="/about" className="font-medium text-violet-700 hover:underline dark:text-violet-300">
                     {post.author}
                   </Link>
                 ) : (
@@ -207,17 +207,17 @@ export default async function BlogPostPage({ params }: Params) {
               {post.description}
             </p>
 
-            <div className="mt-7 rounded-2xl border border-violet-500/20 bg-violet-500/8 p-5">
-              <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-violet-300">
+            <div className="mt-7 rounded-2xl border border-violet-500/20 bg-white/55 p-5 backdrop-blur-sm dark:bg-violet-500/8">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-violet-700 dark:text-violet-300">
                 Short Version
               </div>
-              <p className="mt-3 text-sm leading-7 text-zinc-200">
+              <p className="mt-3 text-sm leading-7 text-zinc-300 dark:text-zinc-200">
                 {quickTakeaway}
               </p>
             </div>
           </header>
 
-          <div className="mt-7 rounded-2xl border border-zinc-800 bg-zinc-900/30 p-5 text-sm leading-7 text-zinc-300">
+          <div className="mt-7 rounded-2xl border border-zinc-800 bg-zinc-900/45 p-5 text-sm leading-7 text-zinc-300">
             These guides are written to solve the problems streamers usually hit
             right before an upload fails: wrong dimensions, overweight files,
             unreadable 28 px previews, or transparency issues. The goal is to
@@ -235,7 +235,7 @@ export default async function BlogPostPage({ params }: Params) {
             <section className="mt-14">
               <div className="mb-3 flex items-center gap-3">
                 <span className="h-px flex-1 bg-gradient-to-r from-violet-500/60 to-transparent" />
-                <span className="rounded-full border border-violet-500/20 bg-violet-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-violet-300">
+                <span className="rounded-full border border-violet-400/40 bg-violet-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-violet-700 dark:border-violet-500/20 dark:text-violet-300">
                   Answers
                 </span>
               </div>
@@ -276,7 +276,7 @@ export default async function BlogPostPage({ params }: Params) {
         {headings.length > 0 && (
           <aside className="lg:sticky lg:top-24">
             <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5 shadow-[0_12px_40px_rgba(0,0,0,0.18)]">
-              <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-violet-300">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-violet-700 dark:text-violet-300">
                 On This Page
               </div>
               <ul className="mt-4 space-y-3 text-sm leading-6 text-zinc-300">
@@ -284,7 +284,7 @@ export default async function BlogPostPage({ params }: Params) {
                   <li key={heading.id}>
                     <a
                       href={`#${heading.id}`}
-                      className="transition hover:text-violet-300"
+                      className="transition hover:text-violet-700 dark:hover:text-violet-300"
                     >
                       {heading.text}
                     </a>

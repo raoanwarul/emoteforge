@@ -60,9 +60,10 @@ const SECTIONS = [
     ],
   },
   {
-    title: "Affiliate Links",
+    title: "Third-Party Links",
     content: [
-      "EmoteForge is currently applying a reduced-monetization setup while the site is reviewed for advertising approval. If affiliate links are introduced or reintroduced in the future, they will be clearly disclosed on the relevant page.",
+      "EmoteForge does not run its own affiliate program. Some pages may include ordinary links to third-party tools, platforms, or documentation for user convenience.",
+      "We are not responsible for the privacy practices or content of third-party websites once you leave EmoteForge.",
     ],
   },
   {
