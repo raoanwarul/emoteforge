@@ -43,18 +43,18 @@ export default function BlogIndex() {
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="group flex flex-col rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 transition hover:-translate-y-0.5 hover:border-violet-500 hover:bg-zinc-900"
+            className="group flex flex-col rounded-2xl border border-zinc-300/60 bg-zinc-900/40 p-6 transition hover:-translate-y-0.5 hover:border-violet-500 hover:bg-zinc-900 dark:border-zinc-800"
           >
             <div className="flex items-center gap-3">
               <span className="grid h-11 w-11 place-items-center rounded-xl bg-zinc-800 text-2xl">
                 {post.hero}
               </span>
               <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-full bg-violet-600/15 px-2.5 py-0.5 text-xs font-medium text-violet-300">
+                <span className="rounded-full bg-violet-100 px-2.5 py-0.5 text-xs font-medium text-violet-700 dark:bg-violet-600/15 dark:text-violet-300">
                   {post.tag}
                 </span>
                 {post.author && (
-                  <span className="rounded-full border border-zinc-700 px-2.5 py-0.5 text-[11px] text-zinc-400">
+                  <span className="rounded-full border border-zinc-400/60 px-2.5 py-0.5 text-[11px] text-zinc-400 dark:border-zinc-700">
                     {post.author}
                   </span>
                 )}

@@ -45,12 +45,12 @@ function renderBlock(block: Block, i: number, isLead: boolean) {
         <div key={i} className="mt-12 scroll-mt-28" id={id}>
           <div className="mb-3 flex items-center gap-3">
             <span className="h-px flex-1 bg-gradient-to-r from-violet-500/60 to-transparent" />
-            <span className="rounded-full border border-violet-500/20 bg-violet-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-violet-300">
+            <span className="rounded-full border border-violet-500/40 bg-violet-100 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-violet-700 dark:border-violet-500/20 dark:bg-violet-500/10 dark:text-violet-300">
               Section
             </span>
           </div>
           <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 sm:text-[1.7rem]">
-            <a href={`#${id}`} className="transition hover:text-violet-300">
+            <a href={`#${id}`} className="transition hover:text-violet-700 dark:hover:text-violet-300">
               {block.text}
             </a>
           </h2>
@@ -70,10 +70,10 @@ function renderBlock(block: Block, i: number, isLead: boolean) {
       );
     case "ul":
       return (
-        <ul key={i} className="mt-5 space-y-3 rounded-2xl border border-zinc-800/80 bg-zinc-900/30 p-5">
+        <ul key={i} className="mt-5 space-y-3 rounded-2xl border border-zinc-300/70 bg-zinc-900/30 p-5 dark:border-zinc-800/80">
           {block.items.map((it, j) => (
             <li key={j} className="flex gap-3 text-zinc-300">
-              <span className="mt-0.5 text-violet-400">•</span>
+              <span className="mt-0.5 text-violet-600 dark:text-violet-400">•</span>
               <span>{it}</span>
             </li>
           ))}
@@ -83,10 +83,10 @@ function renderBlock(block: Block, i: number, isLead: boolean) {
       return (
         <div
           key={i}
-          className="mt-6 overflow-hidden rounded-2xl border border-zinc-800 shadow-[0_16px_40px_rgba(0,0,0,0.18)]"
+          className="mt-6 overflow-hidden rounded-2xl border border-zinc-300/70 shadow-[0_16px_40px_rgba(0,0,0,0.10)] dark:border-zinc-800 dark:shadow-[0_16px_40px_rgba(0,0,0,0.18)]"
         >
           <table className="w-full text-left text-sm">
-            <thead className="bg-zinc-900/90 text-zinc-300">
+            <thead className="bg-violet-50 text-zinc-600 dark:bg-zinc-900/90 dark:text-zinc-300">
               <tr>
                 {block.head.map((h) => (
                   <th key={h} className="px-4 py-3 font-semibold uppercase tracking-wide text-[11px]">
@@ -95,7 +95,7 @@ function renderBlock(block: Block, i: number, isLead: boolean) {
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-800 bg-zinc-950/70 text-zinc-300">
+            <tbody className="divide-y divide-zinc-200 bg-white text-zinc-700 dark:divide-zinc-800 dark:bg-zinc-950/70 dark:text-zinc-300">
               {block.rows.map((row, r) => (
                 <tr key={r}>
                   {row.map((cell, c) => (
@@ -178,7 +178,7 @@ export default async function BlogPostPage({ params }: Params) {
               <span className="rounded-full border border-violet-400/40 bg-violet-500/10 px-3 py-1 font-semibold uppercase tracking-[0.18em] text-violet-700 dark:border-violet-500/20 dark:bg-violet-600/15 dark:text-violet-300">
                 {post.tag}
               </span>
-              <span className="rounded-full border border-zinc-700/80 bg-zinc-950/80 px-3 py-1 text-zinc-500 dark:bg-zinc-900/70 dark:text-zinc-400">
+              <span className="rounded-full border border-zinc-400/60 bg-zinc-800/30 px-3 py-1 text-zinc-500 dark:border-zinc-700/80 dark:bg-zinc-900/70 dark:text-zinc-400">
                 {post.readMinutes} min read
               </span>
               <span>
@@ -217,7 +217,7 @@ export default async function BlogPostPage({ params }: Params) {
             </div>
           </header>
 
-          <div className="mt-7 rounded-2xl border border-zinc-800 bg-zinc-900/45 p-5 text-sm leading-7 text-zinc-300">
+            <div className="mt-7 rounded-2xl border border-zinc-300/60 bg-zinc-900/45 p-5 text-sm leading-7 text-zinc-300 dark:border-zinc-800">
             These guides are written to solve the problems streamers usually hit
             right before an upload fails: wrong dimensions, overweight files,
             unreadable 28 px previews, or transparency issues. The goal is to
@@ -235,7 +235,7 @@ export default async function BlogPostPage({ params }: Params) {
             <section className="mt-14">
               <div className="mb-3 flex items-center gap-3">
                 <span className="h-px flex-1 bg-gradient-to-r from-violet-500/60 to-transparent" />
-                <span className="rounded-full border border-violet-400/40 bg-violet-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-violet-700 dark:border-violet-500/20 dark:text-violet-300">
+                <span className="rounded-full border border-violet-500/40 bg-violet-100 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-violet-700 dark:border-violet-500/20 dark:bg-violet-500/10 dark:text-violet-300">
                   Answers
                 </span>
               </div>
@@ -246,7 +246,7 @@ export default async function BlogPostPage({ params }: Params) {
             {post.faq.map((f) => (
               <div
                 key={f.q}
-                className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5"
+                className="rounded-2xl border border-zinc-300/60 bg-zinc-900/40 p-5 dark:border-zinc-800"
               >
                 <div className="font-medium text-zinc-100">{f.q}</div>
                 <p className="mt-2 text-sm leading-7 text-zinc-400">{f.a}</p>
@@ -275,7 +275,7 @@ export default async function BlogPostPage({ params }: Params) {
 
         {headings.length > 0 && (
           <aside className="lg:sticky lg:top-24">
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5 shadow-[0_12px_40px_rgba(0,0,0,0.18)]">
+            <div className="rounded-2xl border border-zinc-300/60 bg-zinc-900/40 p-5 shadow-[0_8px_24px_rgba(0,0,0,0.08)] dark:border-zinc-800 dark:shadow-[0_12px_40px_rgba(0,0,0,0.18)]">
               <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-violet-700 dark:text-violet-300">
                 On This Page
               </div>
