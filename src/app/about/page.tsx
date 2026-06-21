@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -138,9 +139,17 @@ export default function AboutPage() {
         <h2 className="mb-4 text-xl font-semibold text-zinc-100">
           The Creator
         </h2>
-        <div className="flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-violet-100 text-xl font-bold text-violet-700 dark:bg-violet-600/20 dark:text-violet-400">
-            A
+        <div className="flex items-start gap-5">
+          {/* Circular profile photo */}
+          <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full ring-4 ring-violet-500/30 shadow-lg shadow-violet-900/20">
+            <Image
+              src="/rao-photo.jpg"
+              alt="Arvindesh Malhotra"
+              fill
+              sizes="80px"
+              className="object-cover object-center"
+              priority
+            />
           </div>
           <div className="text-sm leading-relaxed text-zinc-400">
             <p className="font-semibold text-zinc-200">Arvindesh Malhotra</p>

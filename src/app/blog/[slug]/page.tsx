@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPost, POSTS, type Block } from "@/lib/blog";
+import ArticleSidebar from "@/components/ArticleSidebar";
 
 interface Params {
   params: Promise<{ slug: string }>;
@@ -42,16 +43,20 @@ function renderBlock(block: Block, i: number, isLead: boolean) {
       {
         const id = slugify(block.text);
       return (
-        <div key={i} className="mt-12 scroll-mt-28" id={id}>
+        <div key={i} className="mt-12 scroll-mt-28 group" id={id}>
           <div className="mb-3 flex items-center gap-3">
-            <span className="h-px flex-1 bg-gradient-to-r from-violet-500/60 to-transparent" />
+            <span className="h-px flex-1 bg-gradient-to-r from-violet-500/50 to-transparent" />
             <span className="rounded-full border border-violet-500/40 bg-violet-100 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-violet-700 dark:border-violet-500/20 dark:bg-violet-500/10 dark:text-violet-300">
               Section
             </span>
           </div>
           <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 sm:text-[1.7rem]">
-            <a href={`#${id}`} className="transition hover:text-violet-700 dark:hover:text-violet-300">
+            <a
+              href={`#${id}`}
+              className="inline-flex items-center gap-2 transition hover:text-violet-700 dark:hover:text-violet-300"
+            >
               {block.text}
+              <span className="text-base opacity-0 transition-opacity group-hover:opacity-100 text-violet-400">🔗</span>
             </a>
           </h2>
         </div>
@@ -274,25 +279,7 @@ export default async function BlogPostPage({ params }: Params) {
         </div>
 
         {headings.length > 0 && (
-          <aside className="lg:sticky lg:top-24">
-            <div className="rounded-2xl border border-zinc-300/60 bg-zinc-900/40 p-5 shadow-[0_8px_24px_rgba(0,0,0,0.08)] dark:border-zinc-800 dark:shadow-[0_12px_40px_rgba(0,0,0,0.18)]">
-              <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-violet-700 dark:text-violet-300">
-                On This Page
-              </div>
-              <ul className="mt-4 space-y-3 text-sm leading-6 text-zinc-300">
-                {headings.map((heading) => (
-                  <li key={heading.id}>
-                    <a
-                      href={`#${heading.id}`}
-                      className="transition hover:text-violet-700 dark:hover:text-violet-300"
-                    >
-                      {heading.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </aside>
+          <ArticleSidebar headings={headings} />
         )}
       </div>
     </article>
