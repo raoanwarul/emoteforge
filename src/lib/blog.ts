@@ -27,8 +27,8 @@ export const POSTS: BlogPost[] = [
     title: "Twitch Emote Sizes in 2026: The Complete Guide",
     description:
       "Exact Twitch emote dimensions, file size limits and format rules for emotes, sub badges and bits badges — plus how to export every size in one click.",
-    date: "2026-01-12",
-    readMinutes: 6,
+    date: "2026-06-11",
+    readMinutes: 7,
     tag: "Guides",
     hero: "📐",
     author: "Arvindesh Malhotra",
@@ -66,6 +66,46 @@ export const POSTS: BlogPost[] = [
           "Test on a real chat background before exporting.",
         ],
       },
+      { t: "h2", text: "What source file should you start from?" },
+      {
+        t: "p",
+        text: "The cleanest Twitch emotes usually start from a much larger source file, not from a tiny 112 px canvas. If you begin with a large PNG, PSD, Procreate file or vector source, downscaling to Twitch sizes keeps the edges sharper and gives you more room to adjust contrast, outlines and padding before export.",
+      },
+      {
+        t: "ul",
+        items: [
+          "Start from at least 1000×1000 px if your artwork is raster-based.",
+          "Keep the background transparent from the beginning whenever possible.",
+          "Avoid compressed JPG sources for final export because edge artefacts can show up badly at 28 px.",
+          "If the artwork includes text, simplify it or remove it before resizing — it will almost always vanish at chat size.",
+        ],
+      },
+      { t: "h2", text: "Why Twitch uploads get rejected" },
+      {
+        t: "p",
+        text: "Most rejected emotes fail for simple technical reasons rather than art quality. The file is too large, one of the required sizes is missing, the background is not transparent, or the design turns muddy when viewed at 28 px. Checking those details before you upload saves time and prevents needless re-exports.",
+      },
+      {
+        t: "ul",
+        items: [
+          "One or more sizes are not exactly 28, 56 and 112 px.",
+          "The PNG is over the 1 MB size limit.",
+          "The background is opaque or includes white corners.",
+          "The image is technically valid but unreadable at small size.",
+          "The source was upscaled from a tiny image, causing blur and halos.",
+        ],
+      },
+      { t: "h2", text: "A quick quality checklist before export" },
+      {
+        t: "ul",
+        items: [
+          "Preview the emote at 28 px, not just 112 px.",
+          "Check it on both dark and light backgrounds.",
+          "Confirm transparent edges are clean with no white fringe.",
+          "Keep the most important facial or icon detail in the centre of the frame.",
+          "Export the full set together so filenames and sizes stay organised.",
+        ],
+      },
       { t: "h2", text: "Export all sizes in one click" },
       {
         t: "p",
@@ -89,8 +129,8 @@ export const POSTS: BlogPost[] = [
     title: "How to Make Animated Twitch Emotes (No Software)",
     description:
       "Turn a GIF or short video into a looping, Twitch-ready animated emote at 28, 56 and 112 px — without After Effects, right in your browser.",
-    date: "2026-02-03",
-    readMinutes: 5,
+    date: "2026-06-15",
+    readMinutes: 7,
     tag: "Tutorials",
     hero: "🎞️",
     author: "Arvindesh Malhotra",
@@ -109,6 +149,20 @@ export const POSTS: BlogPost[] = [
           "Frame rate: keep it at or below 60 fps; lower fps helps you fit the size limit.",
         ],
       },
+      { t: "h2", text: "Should you start from a GIF or a video clip?" },
+      {
+        t: "p",
+        text: "Both work, but a short source video usually gives you more control than a GIF. Video files keep more colour information and frame detail before conversion, which helps when you crop tightly and then shrink the animation to 28 px. A GIF is still fine if the loop is already clean and short.",
+      },
+      {
+        t: "ul",
+        items: [
+          "Use a 1–3 second clip whenever possible.",
+          "Pick motion with a clear beginning and end so the loop feels intentional.",
+          "Avoid busy backgrounds because they increase file size very quickly.",
+          "Crop tightly around the subject before export so the motion stays readable in chat.",
+        ],
+      },
       { t: "h2", text: "Step by step" },
       {
         t: "ul",
@@ -119,6 +173,20 @@ export const POSTS: BlogPost[] = [
           "Export — the tool reduces colours and frame rate just enough to stay under 1 MB.",
         ],
       },
+      { t: "h2", text: "How to stay under the 1 MB limit" },
+      {
+        t: "p",
+        text: "The biggest reason animated emotes fail is file weight. Twitch's 1 MB limit is strict, and large gradients, long loops and noisy backgrounds push the GIF over the edge. The easiest way to shrink the export is to shorten the loop, lower the frame rate, and simplify the colour palette without ruining the motion.",
+      },
+      {
+        t: "ul",
+        items: [
+          "Trim the clip to the exact moment you need.",
+          "Reduce fps to 24 or 30 if the loop still looks smooth.",
+          "Keep the subject large in frame so fewer unnecessary pixels need to change.",
+          "Use transparent or solid backgrounds instead of textured scenes.",
+        ],
+      },
       { t: "h2", text: "Tips for smooth, small GIFs" },
       {
         t: "ul",
@@ -127,6 +195,17 @@ export const POSTS: BlogPost[] = [
           "Solid or transparent backgrounds shrink the file dramatically.",
           "Avoid heavy gradients and noise — they bloat GIF size.",
           "If a size is over the limit, drop the fps to 24 or 30.",
+        ],
+      },
+      { t: "h2", text: "Common reasons animated emotes get rejected" },
+      {
+        t: "ul",
+        items: [
+          "The GIF is over 1 MB at one or more required sizes.",
+          "The export is not exactly 28, 56 and 112 px.",
+          "The loop looks fine at full size but becomes unreadable at 28 px.",
+          "Too much motion happens in too little space, making the emote look messy in chat.",
+          "Compression introduces colour banding or ugly edge artefacts.",
         ],
       },
       {
@@ -151,8 +230,8 @@ export const POSTS: BlogPost[] = [
     title: "Twitch vs Kick Emotes: Sizes, Limits & Reuse Guide",
     description:
       "A side-by-side comparison of Twitch and Kick emote specifications, and how to export one piece of art for both platforms in seconds.",
-    date: "2026-03-09",
-    readMinutes: 4,
+    date: "2026-06-12",
+    readMinutes: 6,
     tag: "Guides",
     hero: "🟢",
     author: "Arvindesh Malhotra",
@@ -172,6 +251,11 @@ export const POSTS: BlogPost[] = [
           ["Max size", "1 MB", "Optimised for chat"],
         ],
       },
+      { t: "h2", text: "Where Twitch and Kick are effectively the same" },
+      {
+        t: "p",
+        text: "For most streamers, the good news is that one clean emote pipeline works for both platforms. Both expect the same core 28, 56 and 112 px sizes, both support transparent artwork, and both reward bold, readable designs that hold up in tiny chat bubbles. That means you can usually design once and export once.",
+      },
       { t: "h2", text: "Reusing one design for both" },
       {
         t: "p",
@@ -183,6 +267,40 @@ export const POSTS: BlogPost[] = [
           "Keep a transparent background so the emote sits cleanly on any chat colour.",
           "Use the live preview to confirm it reads at 28px.",
           "Export a ZIP so you have every size organised and ready.",
+        ],
+      },
+      { t: "h2", text: "Where the platforms differ in practice" },
+      {
+        t: "ul",
+        items: [
+          "Twitch enforces a very explicit 1 MB limit on emotes and animated emotes.",
+          "Kick's upload flow is simpler, but chat readability still matters just as much.",
+          "Twitch creators often coordinate native emotes with sub badges and bits badges, while Kick focuses more on the emote itself.",
+          "If you use third-party extensions like 7TV or BTTV alongside Twitch, you may want extra exports even though the native Twitch and Kick sizes match.",
+        ],
+      },
+      { t: "h2", text: "When separate exports are still worth doing" },
+      {
+        t: "p",
+        text: "Even when the technical size spec is identical, separate exports can still make sense. Some creators prefer slightly more padding on one platform, or they tune the outline strength differently based on how their chat theme, overlay colours or community meme style looks on each site.",
+      },
+      {
+        t: "ul",
+        items: [
+          "Create one neutral master export for both platforms first.",
+          "If the emote feels cramped on one platform, add 2–4% extra padding for that export only.",
+          "If the subject blends into chat, increase outline thickness slightly.",
+          "Keep the trigger names and folder structure consistent so uploads stay organised.",
+        ],
+      },
+      { t: "h2", text: "A simple upload workflow for both platforms" },
+      {
+        t: "ul",
+        items: [
+          "Prepare one clean transparent source image.",
+          "Export the 28, 56 and 112 px set once.",
+          "Upload the pack to Twitch Creator Dashboard and then to Kick's emote settings.",
+          "Check how the emote reads in live chat after publishing and tweak only if necessary.",
         ],
       },
       {
@@ -204,7 +322,7 @@ export const POSTS: BlogPost[] = [
     title: "Twitch Sub Badge: Complete Design & Upload Guide (2026)",
     description:
       "Everything you need to know about Twitch sub badges — exact sizes, design tips, how to upload them, and how to make all three tiers look great at 18 px.",
-    date: "2026-03-20",
+    date: "2026-06-17",
     readMinutes: 7,
     tag: "Guides",
     hero: "🎖️",
@@ -300,7 +418,7 @@ export const POSTS: BlogPost[] = [
     title: "7TV Emote Guide: Sizes, Requirements & Approval Tips (2026)",
     description:
       "Complete guide to 7TV emotes — upload specifications, the approval process, personal vs channel emote sets, and how to get your first emote accepted.",
-    date: "2026-04-05",
+    date: "2026-06-14",
     readMinutes: 6,
     tag: "Guides",
     hero: "7️⃣",
@@ -395,7 +513,7 @@ export const POSTS: BlogPost[] = [
     title: "BTTV Emote Upload Guide: Everything You Need in 2026",
     description:
       "How to upload custom emotes to BetterTTV — exact file requirements, the approval process, shared vs personal emotes, and tips for getting approved first time.",
-    date: "2026-04-18",
+    date: "2026-06-18",
     readMinutes: 5,
     tag: "Guides",
     hero: "🟣",
@@ -484,7 +602,7 @@ export const POSTS: BlogPost[] = [
     title: "Discord Sticker Size & Format: The Complete Guide (2026)",
     description:
       "Exact Discord sticker requirements for static and animated stickers — dimensions, file size limits, APNG vs GIF, and how to upload them to your server.",
-    date: "2026-05-02",
+    date: "2026-06-16",
     readMinutes: 6,
     tag: "Guides",
     hero: "💬",
@@ -581,7 +699,7 @@ export const POSTS: BlogPost[] = [
     title: "How to Remove Background from Emotes — No Photoshop Needed",
     description:
       "The complete guide to removing backgrounds from emote artwork — manual methods, AI-powered tools, and how to get clean transparent edges every time.",
-    date: "2026-05-15",
+    date: "2026-06-21",
     readMinutes: 6,
     tag: "Tutorials",
     hero: "✂️",
@@ -663,7 +781,7 @@ export const POSTS: BlogPost[] = [
     title: "Twitch Bits Badge: Requirements, Design Tips & Upload Guide",
     description:
       "Everything you need to know about Twitch bits badges — what they are, who gets them, exact size specs, design best practices, and how to upload them.",
-    date: "2026-05-28",
+    date: "2026-06-19",
     readMinutes: 6,
     tag: "Guides",
     hero: "💎",
@@ -749,7 +867,7 @@ export const POSTS: BlogPost[] = [
     title: "What Makes a Good Streaming Emote? Design Tips for Twitch & Kick",
     description:
       "Expert design tips for creating emotes that are readable at 28 px, expressive, and work well in dark and light chat. Covers shapes, contrast, colour and common mistakes.",
-    date: "2026-06-03",
+    date: "2026-06-20",
     readMinutes: 7,
     tag: "Tutorials",
     hero: "🎨",
@@ -861,7 +979,7 @@ export const POSTS: BlogPost[] = [
     title: "How to Become a Twitch Affiliate and Unlock Emotes (2026 Guide)",
     description:
       "Step-by-step guide to reaching Twitch Affiliate status, what emote and badge perks you unlock, and how to make the most of them from day one.",
-    date: "2026-06-08",
+    date: "2026-06-13",
     readMinutes: 7,
     tag: "Guides",
     hero: "🏆",
@@ -961,7 +1079,7 @@ export const POSTS: BlogPost[] = [
     title: "Best Free Tools for Twitch Streamers in 2026 (Emotes, Overlays & More)",
     description:
       "A curated list of the best free tools for streamers in 2026 — covering emote creation, overlays, alerts, audio, scheduling and stream management.",
-    date: "2026-06-13",
+    date: "2026-06-18",
     readMinutes: 8,
     tag: "Resources",
     hero: "🛠️",
@@ -1056,7 +1174,7 @@ export const POSTS: BlogPost[] = [
     title: "How to Create a Full Twitch Emote Pack: Step-by-Step Guide",
     description:
       "How to plan, design and export a complete Twitch emote pack — from choosing an art style to batch-exporting every emote at all required sizes.",
-    date: "2026-06-19",
+    date: "2026-06-21",
     readMinutes: 8,
     tag: "Tutorials",
     hero: "📦",

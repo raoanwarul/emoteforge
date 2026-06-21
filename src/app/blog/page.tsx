@@ -60,7 +60,7 @@ export default function BlogIndex() {
                 )}
               </div>
             </div>
-            <h2 className="mt-4 text-xl font-semibold tracking-tight text-zinc-100 group-hover:text-violet-300">
+            <h2 className="mt-4 text-xl font-semibold tracking-tight text-zinc-100 group-hover:text-violet-700 dark:group-hover:text-violet-300">
               {post.title}
             </h2>
             <p className="mt-2 flex-1 text-sm leading-7 text-zinc-400">
