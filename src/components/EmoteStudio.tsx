@@ -25,8 +25,6 @@ import { buildZip, downloadBlob } from "@/lib/zip";
 import { track, trackView } from "@/lib/analytics";
 import { saveRecent, listRecent, recentToFile, type RecentFile } from "@/lib/recentFiles";
 import { makeAnimated, type AnimationPreset } from "@/lib/makeAnimated";
-import { usePro } from "@/lib/pro";
-import { ProGate } from "@/components/ProGate";
 
 interface Props {
   specId: string;
@@ -34,10 +32,6 @@ interface Props {
 
 export default function EmoteStudio({ specId }: Props) {
   const spec: AssetSpec = getSpec(specId);
-
-  const { isPro } = usePro();
-  const [showProGate, setShowProGate] = useState(false);
-  const [proFeatureName, setProFeatureName] = useState("");
 
   const [file, setFile] = useState<File | null>(null);
   const [working, setWorking] = useState<Blob | null>(null);
@@ -51,7 +45,11 @@ export default function EmoteStudio({ specId }: Props) {
 
   const [opts, setOpts] = useState<ProcessOptions>(DEFAULT_OPTIONS);
   const [animOpts, setAnimOpts] = useState<AnimatedOptions>(DEFAULT_ANIMATED);
-  const [darkPreview, setDarkPreview] = useState(true);
+  const [darkPreview, setDarkPreview] = useState(
+    typeof document !== "undefined"
+      ? document.documentElement.classList.contains("dark")
+      : true,
+  );
 
   // Badge tier variants
   const isBadgeSpec = spec.id.includes("badge");
@@ -101,11 +99,6 @@ export default function EmoteStudio({ specId }: Props) {
     listRecent().then(setRecent);
   }, []);
 
-  // Synchronize chat mockup theme with the site theme on load
-  useEffect(() => {
-    setDarkPreview(document.documentElement.classList.contains("dark"));
-  }, []);
-
   // Load a shared preset from the URL (?p=...) on first mount.
   useEffect(() => {
     try {
@@ -145,30 +138,24 @@ export default function EmoteStudio({ specId }: Props) {
     setError("");
   }, [setResult, setError]);
 
-  const loadFile = useCallback(
-    (f: File, remember = true) => {
-      reset();
-      setFile(f);
-      setWorking(f);
-      setBgRemoved(false);
-      const anim = isAnimatedFile(f) && spec.animatedSupported;
-      setAnimated(anim);
-      setActiveAnimation(null);
-      if (remember) {
-        saveRecent(f).then(() => listRecent().then(setRecent));
-      }
-    },
-    [reset, spec.animatedSupported, setFile, setWorking, setBgRemoved, setAnimated, setRecent],
-  );
+  function loadFile(f: File, remember = true) {
+    reset();
+    setFile(f);
+    setWorking(f);
+    setBgRemoved(false);
+    const anim = isAnimatedFile(f) && spec.animatedSupported;
+    setAnimated(anim);
+    setActiveAnimation(null);
+    if (remember) {
+      saveRecent(f).then(() => listRecent().then(setRecent));
+    }
+  }
 
-  const onDrop = useCallback(
-    (e: React.DragEvent) => {
-      e.preventDefault();
-      const f = e.dataTransfer.files?.[0];
-      if (f) loadFile(f);
-    },
-    [loadFile],
-  );
+  function onDrop(e: React.DragEvent) {
+    e.preventDefault();
+    const f = e.dataTransfer.files?.[0];
+    if (f) loadFile(f);
+  }
 
   const runProcess = useCallback(async () => {
     if (!working) return;
@@ -216,7 +203,10 @@ export default function EmoteStudio({ specId }: Props) {
   // Auto-process when file/options change (static is fast).
   useEffect(() => {
     if (working && !animated) {
-      runProcess();
+      const timer = window.setTimeout(() => {
+        void runProcess();
+      }, 0);
+      return () => window.clearTimeout(timer);
     }
   }, [working, animated, opts, runProcess]);
 
@@ -1191,12 +1181,6 @@ export default function EmoteStudio({ specId }: Props) {
         {result && renderDownloadsCard()}
       </div>
     </div>
-
-    <ProGate
-      open={showProGate}
-      onClose={() => setShowProGate(false)}
-      feature={proFeatureName}
-    />
     </>
   );
 }

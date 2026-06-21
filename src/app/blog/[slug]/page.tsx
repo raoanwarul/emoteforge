@@ -130,7 +130,7 @@ export default async function BlogPostPage({ params }: Params) {
     datePublished: post.date,
     dateModified: post.date,
     author: post.author
-      ? { "@type": "Person", name: post.author, url: "https://raogy.com" }
+      ? { "@type": "Person", name: post.author, url: "https://www.emoteforge.app/about" }
       : { "@type": "Organization", name: "EmoteForge", url: "https://www.emoteforge.app" },
     publisher: {
       "@type": "Organization",
@@ -188,7 +188,7 @@ export default async function BlogPostPage({ params }: Params) {
                     {post.author}
                   </Link>
                 ) : (
-                  "EmoteForge Team"
+                  "Arvindesh Malhotra"
                 )}
               </span>
               <span>

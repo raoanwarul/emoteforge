@@ -13,7 +13,7 @@ const SECTIONS = [
   {
     title: "Who We Are",
     content: [
-      'EmoteForge ("we", "our", "us") is a free browser-based emote and badge creation tool for streamers, operated by RAOGY (raogy.com). Our website is located at https://www.emoteforge.app.',
+      'EmoteForge ("we", "our", "us") is a free browser-based emote and badge creation tool for streamers, operated by Arvindesh Malhotra. Our website is located at https://www.emoteforge.app.',
       "Your privacy is important to us. This policy explains what information we collect, how we use it, and the choices you have.",
     ],
   },
@@ -38,7 +38,7 @@ const SECTIONS = [
         heading: "What We Do NOT Collect",
         items: [
           "Your images, GIFs, or video files. All processing happens entirely in your browser using WebAssembly and the Canvas API. Your files never leave your device.",
-          "Payment information. Payments are handled by LemonSqueezy, a PCI-DSS-compliant payment processor.",
+          "Payment information. We do not currently process payments through the website.",
         ],
       },
     ],
@@ -46,8 +46,8 @@ const SECTIONS = [
   {
     title: "Cookies",
     content: [
-      "We use a minimal number of cookies necessary for the site to function (e.g. theme preference, Pro license status stored in localStorage).",
-      "If you have a Pro subscription, your license key is stored locally in your browser's localStorage. We do not store this on our servers beyond what is required for activation.",
+      "We use a minimal number of browser storage features necessary for the site to function, such as saving your theme preference and local editing state in your browser.",
+      "EmoteForge does not use account cookies for login because the site does not require user accounts.",
     ],
   },
   {
@@ -62,8 +62,7 @@ const SECTIONS = [
   {
     title: "Affiliate Links",
     content: [
-      'Some pages on EmoteForge contain affiliate links to third-party products and services (e.g. Domestika, Own3D, Canva). These are clearly presented on the /recommended page. If you click an affiliate link and make a purchase, we may earn a commission at no additional cost to you.',
-      "We only recommend products we believe are genuinely useful to streamers.",
+      "EmoteForge is currently applying a reduced-monetization setup while the site is reviewed for advertising approval. If affiliate links are introduced or reintroduced in the future, they will be clearly disclosed on the relevant page.",
     ],
   },
   {
@@ -71,7 +70,6 @@ const SECTIONS = [
     rows: [
       ["Google AdSense", "Ad serving", "https://policies.google.com/privacy"],
       ["Google Fonts", "Typography", "https://policies.google.com/privacy"],
-      ["LemonSqueezy", "Payment processing", "https://www.lemonsqueezy.com/privacy"],
       ["Supabase", "Anonymous analytics", "https://supabase.com/privacy"],
       ["Vercel", "Web hosting", "https://vercel.com/legal/privacy-policy"],
     ],

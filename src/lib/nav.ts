@@ -5,7 +5,7 @@ export interface NavTool {
   label: string;
   desc: string;
   icon: string;
-  badge?: "Pro" | "New";
+  badge?: "New";
 }
 
 export interface NavGroup {
@@ -97,7 +97,6 @@ export const NAV_GROUPS: NavGroup[] = [
         label: "Bulk Emote Pack",
         desc: "Upload many images, export one tidy ZIP.",
         icon: "📦",
-        badge: "Pro",
       },
       {
         href: "/blog",
@@ -117,7 +116,7 @@ export interface ToolBarItem {
   href: string;
   short: string;
   icon: string;
-  badge?: "Pro" | "New";
+  badge?: "New";
 }
 
 export const TOOL_BAR: ToolBarItem[] = [
@@ -131,5 +130,5 @@ export const TOOL_BAR: ToolBarItem[] = [
   { href: "/emote-resizer", short: "Resizer", icon: "📐" },
   { href: "/emote-background-remover", short: "Bg Remover", icon: "✂️" },
   { href: "/emote-board", short: "Board", icon: "🎨" },
-  { href: "/bulk-emote-pack", short: "Bulk Pack", icon: "📦", badge: "Pro" },
+  { href: "/bulk-emote-pack", short: "Bulk Pack", icon: "📦" },
 ];

@@ -31,6 +31,7 @@ export const POSTS: BlogPost[] = [
     readMinutes: 6,
     tag: "Guides",
     hero: "📐",
+    author: "Arvindesh Malhotra",
     body: [
       {
         t: "p",
@@ -92,6 +93,7 @@ export const POSTS: BlogPost[] = [
     readMinutes: 5,
     tag: "Tutorials",
     hero: "🎞️",
+    author: "Arvindesh Malhotra",
     body: [
       {
         t: "p",
@@ -153,6 +155,7 @@ export const POSTS: BlogPost[] = [
     readMinutes: 4,
     tag: "Guides",
     hero: "🟢",
+    author: "Arvindesh Malhotra",
     body: [
       {
         t: "p",
@@ -205,7 +208,7 @@ export const POSTS: BlogPost[] = [
     readMinutes: 7,
     tag: "Guides",
     hero: "🎖️",
-    author: "RAOGY",
+    author: "Arvindesh Malhotra",
     body: [
       {
         t: "p",
@@ -301,7 +304,7 @@ export const POSTS: BlogPost[] = [
     readMinutes: 6,
     tag: "Guides",
     hero: "7️⃣",
-    author: "RAOGY",
+    author: "Arvindesh Malhotra",
     body: [
       {
         t: "p",
@@ -396,7 +399,7 @@ export const POSTS: BlogPost[] = [
     readMinutes: 5,
     tag: "Guides",
     hero: "🟣",
-    author: "RAOGY",
+    author: "Arvindesh Malhotra",
     body: [
       {
         t: "p",
@@ -485,7 +488,7 @@ export const POSTS: BlogPost[] = [
     readMinutes: 6,
     tag: "Guides",
     hero: "💬",
-    author: "RAOGY",
+    author: "Arvindesh Malhotra",
     body: [
       {
         t: "p",
@@ -582,7 +585,7 @@ export const POSTS: BlogPost[] = [
     readMinutes: 6,
     tag: "Tutorials",
     hero: "✂️",
-    author: "RAOGY",
+    author: "Arvindesh Malhotra",
     body: [
       {
         t: "p",
@@ -664,7 +667,7 @@ export const POSTS: BlogPost[] = [
     readMinutes: 6,
     tag: "Guides",
     hero: "💎",
-    author: "RAOGY",
+    author: "Arvindesh Malhotra",
     body: [
       {
         t: "p",
@@ -750,7 +753,7 @@ export const POSTS: BlogPost[] = [
     readMinutes: 7,
     tag: "Tutorials",
     hero: "🎨",
-    author: "RAOGY",
+    author: "Arvindesh Malhotra",
     body: [
       {
         t: "p",
@@ -862,7 +865,7 @@ export const POSTS: BlogPost[] = [
     readMinutes: 7,
     tag: "Guides",
     hero: "🏆",
-    author: "RAOGY",
+    author: "Arvindesh Malhotra",
     body: [
       {
         t: "p",
@@ -962,7 +965,7 @@ export const POSTS: BlogPost[] = [
     readMinutes: 8,
     tag: "Resources",
     hero: "🛠️",
-    author: "RAOGY",
+    author: "Arvindesh Malhotra",
     body: [
       {
         t: "p",
@@ -1046,7 +1049,7 @@ export const POSTS: BlogPost[] = [
         a: "No. The tools listed here are all free and used by successful streamers at every level. Clean, consistent design matters more than expensive software.",
       },
     ],
-    cta: { label: "View our recommended tools", href: "/recommended" },
+    cta: { label: "Browse more EmoteForge guides", href: "/blog" },
   },
   {
     slug: "twitch-emote-pack-guide",
@@ -1057,7 +1060,7 @@ export const POSTS: BlogPost[] = [
     readMinutes: 8,
     tag: "Tutorials",
     hero: "📦",
-    author: "RAOGY",
+    author: "Arvindesh Malhotra",
     body: [
       {
         t: "p",
@@ -1125,7 +1128,7 @@ export const POSTS: BlogPost[] = [
       { t: "h2", text: "Step 5: Write great emote names" },
       {
         t: "p",
-        text: "Emote names are how viewers trigger them in chat. A good emote name is short (under 12 characters), memorable, descriptive, and includes your channel name as a prefix to avoid conflicts. For example: RaogyHype, RaogyLUL, RaogyRage.",
+        text: "Emote names are how viewers trigger them in chat. A good emote name is short (under 12 characters), memorable, descriptive, and includes your channel name as a prefix to avoid conflicts. For example: YourNameHype, YourNameLUL, YourNameRage.",
       },
       { t: "h2", text: "Step 6: Announce your emotes to the community" },
       {

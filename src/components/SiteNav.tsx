@@ -18,15 +18,9 @@ function Logo() {
   );
 }
 
-function Badge({ kind }: { kind: "Pro" | "New" }) {
+function Badge({ kind }: { kind: "New" }) {
   return (
-    <span
-      className={`rounded px-1 py-px text-[9px] font-bold uppercase ${
-        kind === "Pro"
-          ? "bg-violet-600/20 text-violet-300"
-          : "bg-emerald-600/20 text-emerald-300"
-      }`}
-    >
+    <span className="rounded bg-emerald-600/20 px-1 py-px text-[9px] font-bold uppercase text-emerald-300">
       {kind}
     </span>
   );

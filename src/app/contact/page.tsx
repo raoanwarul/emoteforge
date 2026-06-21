@@ -74,29 +74,13 @@ export default function ContactPage() {
       {/* Creator link */}
       <section className="mb-10 rounded-2xl border border-zinc-800 bg-zinc-900/30 p-6 sm:p-8">
         <h2 className="mb-3 text-base font-semibold text-zinc-100">
-          Built by RAOGY
+          Built by Arvindesh Malhotra
         </h2>
         <p className="text-sm leading-relaxed text-zinc-400">
-          EmoteForge is a solo project by{" "}
-          <a
-            href="https://raogy.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-violet-400 hover:text-violet-300"
-          >
-            RAOGY
-          </a>
-          . You can also reach out via the personal site for any project-related
-          enquiries, open-source collaboration, or professional work.
+          EmoteForge is an independent project by Arvindesh Malhotra. For
+          project-related enquiries, feedback, privacy requests, or business
+          communication, use the email above and include as much detail as you can.
         </p>
-        <a
-          href="https://raogy.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-violet-400 hover:text-violet-300"
-        >
-          Visit raogy.com →
-        </a>
       </section>
 
       {/* Topic guide */}

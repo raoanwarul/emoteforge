@@ -14,7 +14,7 @@ const SECTIONS = [
     title: "1. Acceptance of Terms",
     content: [
       'By accessing or using EmoteForge ("the Service") at https://www.emoteforge.app, you agree to be bound by these Terms of Service ("Terms"). If you do not agree, please do not use the Service.',
-      "These Terms apply to all users of the Service, including visitors, Pro subscribers, and contributors.",
+      "These Terms apply to all users of the Service, including visitors and contributors.",
     ],
   },
   {
@@ -30,7 +30,7 @@ const SECTIONS = [
       "You retain full ownership of all images, designs, and artwork you create using EmoteForge.",
       "You must own or have the legal right to use any images you upload to the tool. Do not upload artwork, photos, or designs that you do not own or are not licensed to use.",
       "EmoteForge does not claim any ownership over your output files.",
-      'The EmoteForge name, logo, website design, and software code are the intellectual property of RAOGY and may not be copied or reused without written permission.',
+      'The EmoteForge name, logo, website design, and software code are the intellectual property of Arvindesh Malhotra and may not be copied or reused without written permission.',
     ],
   },
   {
@@ -45,12 +45,11 @@ const SECTIONS = [
     ],
   },
   {
-    title: "5. Pro Subscription",
+    title: "5. Free Access",
     items: [
-      "Pro subscriptions are processed by LemonSqueezy. By subscribing, you also agree to LemonSqueezy's Terms of Service.",
-      "Pro features are activated by a license key stored in your browser's local storage. The key is device-specific; you may activate it on a reasonable number of personal devices.",
-      "Refunds are available within 7 days of purchase if the Pro features do not work as described. Contact us at hello@emoteforge.app to request a refund.",
-      "We reserve the right to revoke a Pro license if it is found to be shared, resold, or misused.",
+      "EmoteForge is currently offered as a free-to-use browser tool.",
+      "We do not currently sell subscriptions or license keys through the website.",
+      "If the product model changes in the future, these Terms will be updated before any paid offering is introduced.",
     ],
   },
   {
@@ -65,13 +64,13 @@ const SECTIONS = [
       'The Service is provided "as is" without warranty of any kind. We do not guarantee that the Service will be error-free, uninterrupted, or that output files will always meet third-party platform requirements (as those requirements may change without notice).',
       "EmoteForge is not affiliated with, endorsed by, or sponsored by Twitch, Kick, Discord, 7TV, BTTV, FFZ, or any other platform mentioned on the site.",
       "Platform specifications (sizes, file limits, formats) are maintained to the best of our knowledge but may become outdated. Always verify requirements with the relevant platform's official documentation.",
-      "To the maximum extent permitted by law, EmoteForge and RAOGY shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service.",
+      "To the maximum extent permitted by law, EmoteForge and Arvindesh Malhotra shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service.",
     ],
   },
   {
     title: "8. Affiliate Links",
     content: [
-      "Some pages on EmoteForge contain affiliate links. If you click these links and make a purchase, we may earn a commission. Affiliate relationships do not influence our editorial recommendations.",
+      "EmoteForge may introduce clearly disclosed affiliate links in the future. If that happens, affiliate relationships will not influence our editorial recommendations.",
     ],
   },
   {
@@ -89,7 +88,7 @@ const SECTIONS = [
   {
     title: "11. Governing Law",
     content: [
-      "These Terms shall be governed by and construed in accordance with applicable law. Any disputes shall be subject to the exclusive jurisdiction of the courts in the territory where RAOGY is registered.",
+      "These Terms shall be governed by and construed in accordance with applicable law. Any disputes shall be subject to the exclusive jurisdiction of the courts in the territory where Arvindesh Malhotra is based.",
     ],
   },
   {

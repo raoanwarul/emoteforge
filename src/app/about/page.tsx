@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About EmoteForge",
   description:
-    "Learn about EmoteForge — a free, browser-based emote and badge maker for Twitch, Kick, 7TV, BTTV and Discord, built by RAOGY.",
+    "Learn about EmoteForge — a free, browser-based emote and badge maker for Twitch, Kick, 7TV, BTTV and Discord, built by Arvindesh Malhotra.",
   alternates: { canonical: "/about" },
   robots: { index: true, follow: true },
 };
@@ -37,7 +37,7 @@ const VALUES = [
   {
     icon: "🆓",
     title: "Free for Everyone",
-    desc: "Core tools are and always will be free. A Pro tier unlocks advanced features like animated emote export and bulk processing.",
+    desc: "The public tools on EmoteForge are available free in your browser, with no signup and no paid unlock required to use the core workflow.",
   },
   {
     icon: "🎯",
@@ -68,16 +68,8 @@ export default function AboutPage() {
         <h2 className="text-xl font-semibold text-zinc-100">Our Story</h2>
         <div className="mt-4 space-y-3 text-sm leading-relaxed text-zinc-400">
           <p>
-            EmoteForge was built by{" "}
-            <a
-              href="https://raogy.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-violet-400 hover:text-violet-300"
-            >
-              RAOGY
-            </a>{" "}
-            — a developer and streamer who got frustrated spending 20 minutes
+            EmoteForge was built by Arvindesh Malhotra — a developer and
+            streamer who got frustrated spending 20 minutes
             manually resizing a single emote in Photoshop only to have Twitch
             reject it because one file was 2 KB over the limit.
           </p>
@@ -148,10 +140,10 @@ export default function AboutPage() {
         </h2>
         <div className="flex items-start gap-4">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-violet-600/20 text-xl font-bold text-violet-400">
-            R
+            A
           </div>
           <div className="text-sm leading-relaxed text-zinc-400">
-            <p className="font-semibold text-zinc-200">RAOGY</p>
+            <p className="font-semibold text-zinc-200">Arvindesh Malhotra</p>
             <p className="mt-1">
               Developer, designer, and lifelong gamer with experience in web
               tooling, streaming, and browser-based media processing. EmoteForge
@@ -159,14 +151,6 @@ export default function AboutPage() {
               performance, privacy, and practical value for the streaming
               community.
             </p>
-            <a
-              href="https://raogy.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 inline-block text-violet-400 hover:text-violet-300"
-            >
-              raogy.com →
-            </a>
           </div>
         </div>
       </section>
