@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SiteNav from "@/components/SiteNav";
@@ -125,6 +124,14 @@ export default function RootLayout({
             value: "8963776a-50f9-4adf-9dcb-436bcb2b0096",
           } as React.MetaHTMLAttributes<HTMLMetaElement>)}
         />
+        {/* Google AdSense — placed in <head> so the crawler always finds it */}
+        {ADSENSE_CLIENT && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+            crossOrigin="anonymous"
+          />
+        )}
       </head>
       <body className="flex min-h-full flex-col bg-zinc-950 text-zinc-100">
         <ClientInit />
@@ -133,14 +140,6 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <SiteFooter />
         </Providers>
-        {ADSENSE_CLIENT && (
-          <Script
-            async
-            strategy="afterInteractive"
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
-            crossOrigin="anonymous"
-          />
-        )}
       </body>
     </html>
   );
