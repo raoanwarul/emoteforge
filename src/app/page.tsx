@@ -26,11 +26,6 @@ export default function Home() {
     "name": "EmoteForge",
     "url": "https://www.emoteforge.app",
     "description": "Free online Twitch & Kick Emote and Badge Maker. Resizes emotes in your browser, completely private and instant.",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://www.emoteforge.app/emote-resizer?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
   };
 
   const organizationSchema = {
@@ -57,12 +52,6 @@ export default function Home() {
       "@type": "Offer",
       "price": "0.00",
       "priceCurrency": "USD"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "ratingCount": "127",
-      "bestRating": "5"
     }
   };
 
