@@ -7,8 +7,10 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 /**
  * Google AdSense display slot.
  * - Renders nothing when no client ID is configured.
- * - Collapses to zero height if the slot returns no ad (unfilled),
- *   so no blank "ADVERTISEMENT" box is ever visible to users or reviewers.
+ * - Starts collapsed while the ad auction runs.
+ * - Expands only if the slot is actually filled.
+ * - Stays collapsed forever if the slot is unfilled.
+ * This avoids blank ad placeholders during review and normal browsing.
  */
 export default function AdSlot({
   slot,
@@ -60,15 +62,15 @@ export default function AdSlot({
   // Never render when no publisher ID (dev / pre-approval).
   if (!CLIENT_ID) return null;
 
-  // While waiting for the ad auction, render invisibly so the layout doesn't
-  // jump once we know the result. Once we know it's unfilled, collapse fully.
+  // Keep the node in the DOM so AdSense can inspect/fill it, but collapse it
+  // visually until we know the slot is actually filled.
   const wrapperClass =
-    adFilled === false
-      ? "hidden"
-      : `my-8 overflow-hidden text-center ${className}`;
+    adFilled === true
+      ? `my-8 overflow-hidden text-center ${className}`
+      : "m-0 max-h-0 overflow-hidden opacity-0 pointer-events-none";
 
   return (
-    <div className={wrapperClass} aria-hidden={adFilled === false}>
+    <div className={wrapperClass} aria-hidden={adFilled !== true}>
       {adFilled === true && (
         <span className="mb-1 block text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-700">
           Advertisement
