@@ -174,17 +174,17 @@ export default async function BlogPostPage({ params }: Params) {
           </Link>
 
           <header className="mt-6 rounded-[28px] border border-zinc-800/80 bg-[radial-gradient(circle_at_top,_rgba(139,92,246,0.12),_transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.98),rgba(244,244,245,0.98))] p-7 shadow-[0_18px_48px_rgba(24,24,27,0.10)] sm:p-9">
-            <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-400">
-              <span className="rounded-full border border-violet-400/40 bg-violet-500/10 px-3 py-1 font-semibold uppercase tracking-[0.18em] text-violet-700 dark:border-violet-500/20 dark:bg-violet-600/15 dark:text-violet-300">
+            <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-100">
+              <span className="rounded-full border border-zinc-300/80 bg-zinc-800/15 px-3 py-1 font-semibold uppercase tracking-[0.18em] dark:border-zinc-600/50 dark:bg-zinc-800/30">
                 {post.tag}
               </span>
-              <span className="rounded-full border border-zinc-400/60 bg-zinc-800/30 px-3 py-1 text-zinc-500 dark:border-zinc-700/80 dark:bg-zinc-900/70 dark:text-zinc-400">
+              <span className="rounded-full border border-zinc-300/80 bg-zinc-800/15 px-3 py-1 dark:border-zinc-600/50 dark:bg-zinc-800/30">
                 {post.readMinutes} min read
               </span>
               <span>
                 By{" "}
                 {post.author ? (
-                  <Link href="/about" className="font-medium text-violet-700 hover:underline dark:text-violet-300">
+                  <Link href="/about" className="font-semibold hover:underline">
                     {post.author}
                   </Link>
                 ) : (
